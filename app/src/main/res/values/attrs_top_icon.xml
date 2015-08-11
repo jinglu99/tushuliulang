@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="TopIcon">
+        <attr name="text" format="string" />
+        <attr name="textsize" format="dimension" />
+        <attr name="iconcolor" format="color" />
+        <attr name="drawable" format="color|reference" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:weightSum="1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffffff">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.03"
+        android:background="@android:drawable/bottom_bar">
+
+        <com.zjut.tushuliulang.tushuliulang.CircleImageView
+            android:layout_width="89dp"
+            android:layout_height="79dp"
+            android:layout_centerInParent="true"
+            app:border_width="2dp"
+            app:border_color="@color/dim_foreground_disabled_material_dark"
+            android:src="@drawable/lzy"
+            android:id="@+id/pic_iv"
+             />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="127dp"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="未登陆"
+                android:id="@+id/username_tv"
+                android:gravity="center"
+                android:textColor="#ffffffff" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.84"
+        android:weightSum="1">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:id="@+id/menu_listview"
+            android:layout_gravity="center"
+            android:layout_weight="1.09" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.13"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="设置"
+            android:id="@+id/textView2"
+            android:gravity="center"
+            android:textColor="#ffffffff" />
+    </LinearLayout>
+</LinearLayout>

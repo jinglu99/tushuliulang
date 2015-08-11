@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal">
+
+        <com.zjut.tushuliulang.tushuliulang.CircleImageView
+            android:layout_width="89dp"
+            android:layout_height="79dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/listadapter_xinde_image"
+            app:border_width="2dp"
+            app:border_color="@color/dim_foreground_disabled_material_dark"
+            android:src="@drawable/lzy"
+            />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="44dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/listadapter_xinde_title"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Small Text"
+                android:id="@+id/listadapter_xinde_text"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.31" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
