@@ -1,5 +1,7 @@
-package com.zjut.tushuliulang.tushuliulang;
+package com.zjut.tushuliulang.tushuliulang.widget;
 
+
+//圆形的imageview
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -16,6 +18,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.zjut.tushuliulang.tushuliulang.R;
 
 
 public class CircleImageView extends ImageView {

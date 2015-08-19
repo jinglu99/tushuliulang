@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang;
+package com.zjut.tushuliulang.tushuliulang.fragment;
 
 
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.zjut.tushuliulang.tushuliulang.R;
+import com.zjut.tushuliulang.tushuliulang.listadapter_xinde;
 
 import java.util.ArrayList;
 import java.util.HashMap;

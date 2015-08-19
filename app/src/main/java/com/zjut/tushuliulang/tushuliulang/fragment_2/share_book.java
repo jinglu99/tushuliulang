@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang;
+package com.zjut.tushuliulang.tushuliulang.fragment_2;
 
 
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+
+import com.zjut.tushuliulang.tushuliulang.R;
+import com.zjut.tushuliulang.tushuliulang.listadapter_share;
 
 import java.util.ArrayList;
 import java.util.HashMap;

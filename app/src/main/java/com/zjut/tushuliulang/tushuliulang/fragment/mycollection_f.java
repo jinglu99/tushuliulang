@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang;
+package com.zjut.tushuliulang.tushuliulang.fragment;
 
 
 import android.os.AsyncTask;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.net.Change_Info;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
 import com.zjut.tushuliulang.tushuliulang.net.Search;

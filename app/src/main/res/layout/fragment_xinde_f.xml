@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.zjut.tushuliulang.tushuliulang.xinde_f">
+    android:layout_height="match_parent" tools:context="com.zjut.tushuliulang.tushuliulang.fragment.xinde_f">
 
     <!-- TODO: Update blank fragment layout -->
 

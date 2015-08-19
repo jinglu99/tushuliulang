@@ -20,7 +20,7 @@
         android:layout_weight="0.03"
         android:background="@android:drawable/bottom_bar">
 
-        <com.zjut.tushuliulang.tushuliulang.CircleImageView
+        <com.zjut.tushuliulang.tushuliulang.widget.CircleImageView
             android:layout_width="89dp"
             android:layout_height="79dp"
             android:layout_centerInParent="true"

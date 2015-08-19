@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang;
+package com.zjut.tushuliulang.tushuliulang.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,6 +15,8 @@ import android.os.Looper;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.zjut.tushuliulang.tushuliulang.R;
 
 
 /**

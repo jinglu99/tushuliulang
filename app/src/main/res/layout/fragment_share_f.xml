@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent" tools:context="com.zjut.tushuliulang.tushuliulang.share_f"
+    android:layout_height="match_parent" tools:context="com.zjut.tushuliulang.tushuliulang.fragment.share_f"
     android:orientation="vertical">
     <!-- TODO: Update blank fragment layout -->
 
@@ -17,7 +17,7 @@
         android:layout_alignParentStart="true"
         android:background="#ff4f28dc">
 
-        <com.zjut.tushuliulang.tushuliulang.TopIcon
+        <com.zjut.tushuliulang.tushuliulang.widget.TopIcon
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -28,7 +28,7 @@
             app:text="书籍"
             android:id="@+id/share_topicon_1"
             android:background="#ffdcdcdc" />
-        <com.zjut.tushuliulang.tushuliulang.TopIcon
+        <com.zjut.tushuliulang.tushuliulang.widget.TopIcon
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
