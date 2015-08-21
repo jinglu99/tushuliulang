@@ -4,6 +4,7 @@ package com.zjut.tushuliulang.tushuliulang.activities;
 //书籍搜索界面
 
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.net.BOOK_INFO;
 import com.zjut.tushuliulang.tushuliulang.net.Search;
-import com.zjut.tushuliulang.tushuliulang.widget.book_view;
+import com.zjut.tushuliulang.tushuliulang.widget.*;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 
@@ -40,13 +41,13 @@ public class search_activity extends ActionBarActivity implements View.OnClickLi
 
         book = new book_view(this);
 
-        for(int n =0 ; n<10;n++)
-        {
-            TextView tv = new TextView(this);
-            tv.setText("adffas");
-            search_recommend.addView(tv);
-        }
 
+        for(int n = 0 ; n<3;n++)
+        {
+            book_recommend_in_search_activity book_recommend = new book_recommend_in_search_activity(this);
+            book_recommend.setcontent("",null,"",null);
+            search_recommend.addView(book_recommend);
+        }
         search_button.setOnClickListener(this);
     }
 
