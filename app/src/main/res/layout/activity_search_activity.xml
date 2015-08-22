@@ -4,7 +4,9 @@
     android:baselineAligned="false"
     android:orientation="vertical">
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
@@ -41,18 +43,35 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/search_result">
 
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="false" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推荐"
+            android:id="@+id/textView3"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#53e7ff" />
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/search_recommemd">
+            android:id="@+id/search_recommemd"
+            android:background="@android:drawable/editbox_background_normal">
 
         </LinearLayout>
       </LinearLayout>

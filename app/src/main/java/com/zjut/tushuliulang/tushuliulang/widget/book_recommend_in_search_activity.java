@@ -12,6 +12,8 @@ import com.zjut.tushuliulang.tushuliulang.R;
 
 /**
  * Created by Ben on 2015/8/21.
+ *
+ * 书籍推荐控件   setcontent()设置显示内容
  */
 public class book_recommend_in_search_activity extends LinearLayout {
 
