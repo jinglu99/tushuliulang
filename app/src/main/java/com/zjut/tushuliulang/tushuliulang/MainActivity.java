@@ -1,7 +1,6 @@
 package com.zjut.tushuliulang.tushuliulang;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
-import com.zjut.tushuliulang.tushuliulang.activities.search_activity;
 import com.zjut.tushuliulang.tushuliulang.fragment.library_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.mycollection_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.share_f;
@@ -131,9 +129,7 @@ public class MainActivity extends ActionBarActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.main_search) {
-            Intent intent = new Intent(this, search_activity.class);
-            startActivity(intent);
+        if (id == R.id.action_settings) {
             return true;
         }
 

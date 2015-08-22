@@ -5,10 +5,8 @@ package com.zjut.tushuliulang.tushuliulang.net;
  */
 public class TSLLURL
 {
-    public static String host = "http://120.24.242.211:80/tushu/";
-    public static String login =host+"login.php";
-    public static String changeinfo = host+"changeinfo.php";
-    public static String search = host+"search.php";
-    public static String bookinfo = host+"bookinfo.php";
-    public static String picurl =host+ "pic/";
+    public static String login ="http://120.24.242.211:80/tushu/login.php";
+    public static String changeinfo = "http://120.24.242.211/tushu/changeinfo.php";
+    public static String search = "http://120.24.242.211/tushu/search.php";
+    public static String picurl = "http://120.24.242.211/tushu/pic/";
 }

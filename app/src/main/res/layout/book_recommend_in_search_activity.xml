@@ -23,8 +23,11 @@
                 android:layout_width="100dp"
                 android:layout_height="125dp"
                 android:id="@+id/image1"
-                android:src="@drawable/book"
-                 />
+                android:src="@android:drawable/ic_menu_report_image"
+                android:paddingLeft="50dp"
+                android:paddingTop="50dp"
+                android:paddingRight="50dp"
+                android:paddingBottom="50dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,8 +54,11 @@
                     android:layout_width="100dp"
                     android:layout_height="125dp"
                     android:id="@+id/image2"
-                    android:src="@drawable/book"
-                     />
+                    android:src="@android:drawable/ic_menu_report_image"
+                    android:paddingLeft="50dp"
+                    android:paddingTop="50dp"
+                    android:paddingRight="50dp"
+                    android:paddingBottom="50dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
