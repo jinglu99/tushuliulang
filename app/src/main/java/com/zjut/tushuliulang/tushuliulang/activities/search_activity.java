@@ -3,17 +3,24 @@ package com.zjut.tushuliulang.tushuliulang.activities;
 
 //书籍搜索界面
 
+import android.support.v7.app.ActionBar;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.net.BOOK_INFO;
@@ -29,6 +36,10 @@ public class search_activity extends ActionBarActivity implements View.OnClickLi
     book_view book;
     EditText search_edit;
     Button search_button;
+    ActionBar actionBar;
+
+
+    Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,20 +52,29 @@ public class search_activity extends ActionBarActivity implements View.OnClickLi
 
         book = new book_view(this);
 
-
+//书籍推荐ui显示
         for(int n = 0 ; n<3;n++)
         {
             book_recommend_in_search_activity book_recommend = new book_recommend_in_search_activity(this);
-            book_recommend.setcontent("",null,"",null);
+//            book_recommend.setcontent("",null,"",null);
             search_recommend.addView(book_recommend);
         }
+
+
+
         search_button.setOnClickListener(this);
+
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search, menu);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         return true;
     }
 
@@ -66,7 +86,8 @@ public class search_activity extends ActionBarActivity implements View.OnClickLi
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == android.R.id.home) {
+            this.finish();
             return true;
         }
 
@@ -75,10 +96,13 @@ public class search_activity extends ActionBarActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.search_button)
-        {
-            new searchtask().execute(search_edit.getText().toString());
+        if(v.getId()==R.id.search_button) {
+
+            if (!search_edit.getText().toString().equals("")) {
+                new searchtask().execute(search_edit.getText().toString());
+            }
         }
+
     }
     class searchtask extends AsyncTask<String,String,String>
     {
@@ -103,14 +127,21 @@ public class search_activity extends ActionBarActivity implements View.OnClickLi
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             search_layout.removeAllViews();
+            search_layout.setBackgroundResource(R.drawable.dialog_background_mtrl_mult);
             if(founded)
             {
                 books = search.returnresult();
                 for (int n = 0; n < books.length; n++)
                 {
+                    search_layout.setGravity(Gravity.NO_GRAVITY);
                     book.setContent(books[n]);
                     search_layout.addView(book);
                 }
+            }
+            else
+            {
+                can_not_find view = new can_not_find(context);
+                search_layout.addView(view);
             }
         }
     }
