@@ -8,6 +8,7 @@ import android.media.Image;
  */
 public class STU_INFO {
     public String Name = "";
+    public String Id = "";
     public String UserName ="";
     public String college="";
     public String Class="";
@@ -18,4 +19,5 @@ public class STU_INFO {
     public String Sex="";
     public Bitmap image=null;
     public String imagedir = "";
+    public String password = "";
 }

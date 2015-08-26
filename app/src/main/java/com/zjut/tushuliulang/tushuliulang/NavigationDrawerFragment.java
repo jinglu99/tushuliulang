@@ -1,5 +1,6 @@
 package com.zjut.tushuliulang.tushuliulang;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
@@ -27,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zjut.tushuliulang.tushuliulang.activities.login_activity;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
 import com.zjut.tushuliulang.tushuliulang.net.login;
 
@@ -106,7 +108,7 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
       LinearLayout menu  = (LinearLayout) inflater.inflate(R.layout.left_menu,container,false);
-        pic = (ImageView) menu.findViewById(R.id.pic_iv);
+        pic = (ImageView) menu.findViewById(R.id.userimage);
         username = (TextView) menu.findViewById(R.id.username_tv);
         mDrawerListView = (ListView) menu.findViewById(R.id.menu_listview);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -127,7 +129,16 @@ public class NavigationDrawerFragment extends Fragment {
 
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-       new loginasy().execute();
+
+        username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(),login_activity.class);
+                startActivity(intent);
+            }
+        });
+
         return menu;
     }
 
@@ -313,35 +324,5 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
-    class loginasy extends AsyncTask<String,String,String>
-    {
-        login l;
-        STU_INFO stu_info;
 
-        @Override
-        protected String doInBackground(String... params) {
-            l = new login("201419630314","wjlwjl");
-            l.auto_login();
-            if(l.fetch())
-            {
-                stu_info = l.returns();
-                islogined=true;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            if (islogined==true)
-            {
-                username.setText(stu_info.UserName);
-                pic.setImageBitmap(stu_info.image);
-            }
-            else
-            {
-                username.setText("未登");
-            }
-            super.onPostExecute(s);
-        }
-    }
 }

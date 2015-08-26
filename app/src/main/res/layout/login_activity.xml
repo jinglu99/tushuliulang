@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_bright"
+    >
+
+    <RelativeLayout
+        android:layout_marginTop="48dp"
+        android:id="@+id/editRel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/accountRel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="账号"
+                android:layout_marginLeft="40dp"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/et_user"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/account"
+                android:hint="请输入账号"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:id="@+id/pwdRel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/accountRel"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="密码"
+                android:layout_marginLeft="40dp"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dip"
+                android:layout_toRightOf="@id/pwd"
+                android:hint="请输入密码"
+                android:textSize="15sp"
+                android:password="true" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/loginRel"
+            android:layout_below="@id/pwdRel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <CheckBox
+                android:id="@+id/rememberinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="记住账号与密码"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+
+                />
+
+            <Button
+                android:id="@+id/bt_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="登陆"
+                android:layout_marginLeft="250dp"
+                android:onClick="login"
+                />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/wrong_info"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="账号或密码错误"
+        android:gravity="bottom|center_horizontal"
+        android:visibility="invisible"
+        android:textColor="#ff1210" />
+
+</RelativeLayout>

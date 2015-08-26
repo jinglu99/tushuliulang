@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang.net;
+package com.zjut.tushuliulang.tushuliulang.backoperate;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,13 +18,13 @@ public class SaveToFile
 {
 
     private String  dir;
-    private InputStream inputStream;
+
     private String string;
 
-    public SaveToFile(String dir,String string,InputStream inputStream)
+    public SaveToFile(String dir,String string)
     {
         this.dir = dir;
-        this.inputStream = inputStream;
+
         this.string = string;
     }
 
@@ -34,12 +34,8 @@ public class SaveToFile
             File f = new File(dir);
             f.createNewFile();
             FileOutputStream file = new FileOutputStream(f);
-            byte b[] = new byte[1024];
-            while(inputStream.read(b)!=-1)
-            {
-                file.write(b);
-            }
-//            file.write(string.getBytes());
+
+            file.write(string.getBytes());
             file.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

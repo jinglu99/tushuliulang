@@ -3,12 +3,13 @@ package com.zjut.tushuliulang.tushuliulang.net;
 import android.os.Environment;
 import android.util.Log;
 
+import com.zjut.tushuliulang.tushuliulang.backoperate.SaveToFile;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -63,7 +64,7 @@ public class login {
         return isenter;
     }
 
-    public void connect() {
+   private void connect() {
         List<BasicNameValuePair> gets = new LinkedList<>();
         gets.add(new BasicNameValuePair("username", username));
         gets.add(new BasicNameValuePair("password", password));
@@ -110,7 +111,8 @@ public class login {
 
 
             tmp = sb.toString();
-            SaveToFile s = new SaveToFile(Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/info.txt",tmp,is);
+            SaveToFile s = new SaveToFile(Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/info.db",
+                    tmp);
             s.save();
             is.close();
         } catch (Exception e) {
@@ -119,7 +121,7 @@ public class login {
 
 
 }
-    public STU_INFO regexp()
+    private STU_INFO regexp()
     {
        Pattern p = Pattern.compile("<login>true</login>");
        Matcher m = p.matcher(tmp);
@@ -174,12 +176,14 @@ public class login {
                 if(matcher.find())
                     stu_info.Sex = matcher.group(1);
 
-                pattern = Pattern.compile("<pic>(.*)</pic>");
-                matcher = pattern.matcher(tmp);
-                if(matcher.find())
-                    stu_info.image = new getImagefromNet(PICurl+"201419630314.jpg").image();
+//                pattern = Pattern.compile("<pic>(.*)</pic>");
+//                matcher = pattern.matcher(tmp);
+//                if(matcher.find())
+//                    stu_info.image = new getImagefromNet(PICurl+"201419630314.jpg").image();
 
-                Downlaod.FileDownload("http://120.24.242.211/tushu/pic/123456.jpg","/tushuliulang",2);
+                Downlaod.FileDownload("http://120.24.242.211/tushu/pic/"+username+".jpg","/tushuliulang/data/",2);
+
+                stu_info.Id = username;
 
                     isenter = true;
                    return stu_info;

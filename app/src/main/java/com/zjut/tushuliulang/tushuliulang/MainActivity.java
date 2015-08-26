@@ -1,7 +1,13 @@
 package com.zjut.tushuliulang.tushuliulang;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -13,12 +19,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.activities.search_activity;
 import com.zjut.tushuliulang.tushuliulang.fragment.library_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.mycollection_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.share_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.xinde_f;
+import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
+import com.zjut.tushuliulang.tushuliulang.backoperate.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 public class MainActivity extends ActionBarActivity
@@ -37,12 +51,26 @@ public class MainActivity extends ActionBarActivity
     private library_f library;
     private xinde_f xinde;
     private mycollection_f mycollection;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //测试专用 无意义
+        test();
+
+        //自动登陆
+        auto_login();
+
         initfragment();
+        //注册广播
+        initbroadcast();
+
+        //第一次打开 创建文件夹
+        createDirectory file = new createDirectory();
+        file.create();
 
 
 
@@ -55,6 +83,8 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
+
+
 
     private void initfragment() {
 //        share = new share_f();
@@ -205,4 +235,90 @@ public class MainActivity extends ActionBarActivity
 //                .replace(R.id.container,fragment)
 //                .commit();
     }
+
+
+
+
+    public void initbroadcast()
+    {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String s = intent.getAction();
+
+                switch (s)
+                {
+                    case "logined":
+                        Bitmap bitmap = null;
+                       STU_INFO stu_info = GetInfoFromFile.getinfo();
+                        ((TextView)findViewById(R.id.username_tv)).setText(stu_info.UserName);
+
+
+
+                        try {
+                            FileInputStream image = new FileInputStream
+                                    (Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/"+stu_info.Id+".jpg");
+                            bitmap = BitmapFactory.decodeStream(image);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (bitmap!=null) {
+                            ((ImageView) findViewById(R.id.userimage)).setImageBitmap(bitmap);
+                        }
+
+                        ((TextView)findViewById(R.id.username_tv)).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // 跳转到个人信息activity
+
+                            }
+                        });
+                        break;
+
+                }
+            }
+        };
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("logined");
+        registerReceiver(broadcastReceiver,intentFilter);
+    }
+    private void auto_login()
+    {
+        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/info.db");
+
+        if(file.exists())
+        {
+            Bitmap bitmap = null;
+            STU_INFO stu_info = GetInfoFromFile.getinfo();
+            ((TextView)findViewById(R.id.username_tv)).setText(stu_info.UserName);
+
+            try {
+                FileInputStream image = new FileInputStream
+                        (Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/"+stu_info.Id+".jpg");
+                bitmap = BitmapFactory.decodeStream(image);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            if (bitmap!=null) {
+                ((ImageView) findViewById(R.id.userimage)).setImageBitmap(bitmap);
+            }
+
+            ((TextView)findViewById(R.id.username_tv)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 跳转到个人信息activity
+
+                }
+            });
+        }
+    }
+
+    //专供测试使用
+    private void test() {
+//        login l = new login("201419630314","wjlwjl");
+//        l.fetch();
+    }
+
 }
