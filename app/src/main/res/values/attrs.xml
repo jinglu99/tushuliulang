@@ -5,4 +5,14 @@
         <attr name="border_color" format="color" />
 
         </declare-styleable>
+
+    <declare-styleable name="FloatingActionButton">
+        <attr name="drawable" format="integer"/>
+
+        <attr name="shadowRadius" format="float"/>
+        <attr name="shadowDx" format="float"/>
+        <attr name="shadowDy" format="float"/>
+        <attr name="shadowColor" format="integer"/>
+    </declare-styleable>
+
 </resources>

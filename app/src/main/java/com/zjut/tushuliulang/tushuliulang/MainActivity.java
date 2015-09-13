@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.activities.add_book_share;
 import com.zjut.tushuliulang.tushuliulang.activities.search_activity;
+import com.zjut.tushuliulang.tushuliulang.ask.AskAcitivity;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
 import com.zjut.tushuliulang.tushuliulang.backoperate.createDirectory;
 import com.zjut.tushuliulang.tushuliulang.fragment.library_f;
@@ -34,6 +35,7 @@ import com.zjut.tushuliulang.tushuliulang.fragment.xinde_f;
 import com.zjut.tushuliulang.tushuliulang.net.BOOK_SHARE;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
 import com.zjut.tushuliulang.tushuliulang.net.getbookshares;
+import com.zjut.tushuliulang.tushuliulang.question.Frame_questions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -56,6 +58,7 @@ public class MainActivity extends ActionBarActivity
     private library_f library;
     private xinde_f xinde;
     private mycollection_f mycollection;
+    private int currentItem = 0;
 
 
 
@@ -63,6 +66,7 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
         //自动登陆
@@ -105,35 +109,52 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
 
-        // update the main content by replacing fragments
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-////        mContent =PlaceholderFragment.newInstance(position + 1);
-//
-//
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.container, PlaceholderFragment.newInstance(position+1))
-//                    .commit();
-
-        this.onSectionAttached( position+1);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        switch(position){
+            case 0:
+                currentItem = 0;
+                fragmentManager.beginTransaction()
+                        //newInstance产生一个fragment的实例，并传递一个键值为ARGSECTIONNUMBER的参数
+                        .replace(R.id.container, share_f.newInstance(position + 1))
+                        .commit();
+                break;
+            case 1:
+                currentItem = 1;
+                fragmentManager.beginTransaction()
+                        //newInstance产生一个fragment的实例，并传递一个键值为ARGSECTIONNUMBER的参数
+                        .replace(R.id.container, Frame_questions.newInstance(position + 1))
+                        .commit();
+                break;
+            case 2:
+                currentItem = 2;
+                fragmentManager.beginTransaction()
+                        //newInstance产生一个fragment的实例，并传递一个键值为ARGSECTIONNUMBER的参数
+                        .replace(R.id.container, library_f.newInstance(position + 1))
+                        .commit();
+                break;
+            case 3:
+                currentItem = 3;
+                fragmentManager.beginTransaction()
+                        //newInstance产生一个fragment的实例，并传递一个键值为ARGSECTIONNUMBER的参数
+                        .replace(R.id.container, mycollection_f.newInstance(position + 1))
+                        .commit();
+                break;
+        }
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
-                switchConent(share);
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
-                switchConent( xinde);
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
-                switchConent(library);
                 break;
             case 4:
                 mTitle = getString(R.string.title_section4);
-                switchConent(mycollection);
                 break;
 
         }
@@ -174,11 +195,23 @@ public class MainActivity extends ActionBarActivity
             startActivity(intent);
             return true;
         }
-        else if (id == R.id.main_add)
+            else if (id == R.id.main_add)
         {
-            Intent intent = new Intent(this,add_book_share.class);
-            startActivity(intent);
-            return true;
+            switch (currentItem){
+                case 0:
+                    Intent intent = new Intent(this,add_book_share.class);
+                    startActivity(intent);
+                    return true;
+                case 1:
+                    Intent intent_ask = new Intent(this,AskAcitivity.class);
+                    startActivityForResult(intent_ask, 1);
+                    return true;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -226,32 +259,6 @@ public class MainActivity extends ActionBarActivity
         }
 
     }
-    public void switchConent(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if (mContent==null)
-        {
-            share = new share_f();
-            mContent = share;
-            fragmentManager.beginTransaction().replace(R.id.container,mContent).commit();
-//            mContent = share;
-            return;
-        }
-       if(fragment.isAdded())
-       {
-           fragmentManager.beginTransaction().hide(mContent).show(fragment).commit();
-       }
-        else
-       {
-           fragmentManager.beginTransaction().hide(mContent).add(R.id.container,fragment).commit();
-       }
-        mContent = fragment;
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container,fragment)
-//                .commit();
-    }
-
-
-
 
     public void initbroadcast()
     {

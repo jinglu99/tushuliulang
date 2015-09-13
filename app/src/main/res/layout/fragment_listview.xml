@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/listview_selector">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!--<com.zjut.tushuliulang.tushuliulang.widget.CircleImageView-->
+            <!--android:layout_width="89dp"-->
+            <!--android:layout_height="79dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--app:border_width="2dp"-->
+            <!--app:border_color="@color/dim_foreground_disabled_material_dark"-->
+            <!--android:src="@mipmap/lzy"-->
+            <!--android:id="@+id/iv_circle"-->
+            <!--/>-->
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="70dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/lzy"
+            android:id="@+id/iv_image"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_fragment_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="问题"
+            android:ellipsize="end"
+            android:textSize="20sp"
+            android:singleLine="true"/>
+
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/tv_fragment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="时间"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:padding="16dp"
+        android:text="内容"
+        android:lines="3"
+        android:textSize="25sp"/>
+
+
+</LinearLayout>

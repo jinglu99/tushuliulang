@@ -9,19 +9,26 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/icontsll"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+
+        <activity android:name=".splash.activity_Splash"
+            android:theme="@style/AppSplash"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainActivity">
+        </activity>
+
         <activity
             android:name=".activities.search_activity"
             android:label="@string/title_activity_search_activity" >
@@ -36,6 +43,17 @@
             android:windowSoftInputMode="stateHidden"
             >
 
+        </activity>
+        <activity android:name=".question.QuestionsEnterActivity"
+            android:theme="@style/AppNoActionBar">
+        </activity>
+
+        <activity android:name=".question.RespondActivity"
+            android:theme="@style/AppNoActionBar">
+        </activity>
+
+        <activity android:name=".ask.AskAcitivity"
+            android:theme="@style/AppNoActionBar">
         </activity>
     </application>
 

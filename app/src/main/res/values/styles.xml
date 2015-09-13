@@ -14,4 +14,13 @@
         <item name="android:background">@android:color/holo_red_light</item>
 
     </style>
+
+    <style name="AppSplash" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@mipmap/splash</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
 </resources>
