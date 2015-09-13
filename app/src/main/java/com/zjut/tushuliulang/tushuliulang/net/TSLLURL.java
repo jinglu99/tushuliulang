@@ -11,4 +11,8 @@ public class TSLLURL
     public static String search = host+"search.php";
     public static String bookinfo = host+"bookinfo.php";
     public static String picurl =host+ "pic/";
+    public static String publishbookshare = host+"publishbookinfo.php";
+    public static String getbookshares = host + "getbookshare.php";
+    public static String publichbookshareimg = host + "publishbookinfouploadimg.php";
+    public static String bookshareimg = host + "book_share/pic/";
 }

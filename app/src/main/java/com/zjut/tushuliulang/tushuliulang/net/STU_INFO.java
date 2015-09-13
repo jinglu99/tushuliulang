@@ -1,7 +1,6 @@
 package com.zjut.tushuliulang.tushuliulang.net;
 
 import android.graphics.Bitmap;
-import android.media.Image;
 
 /**
  * Created by Ben on 2015/7/28.

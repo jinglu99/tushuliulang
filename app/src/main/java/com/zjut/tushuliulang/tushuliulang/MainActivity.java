@@ -7,28 +7,33 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zjut.tushuliulang.tushuliulang.activities.add_book_share;
 import com.zjut.tushuliulang.tushuliulang.activities.search_activity;
+import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
+import com.zjut.tushuliulang.tushuliulang.backoperate.createDirectory;
 import com.zjut.tushuliulang.tushuliulang.fragment.library_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.mycollection_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.share_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.xinde_f;
+import com.zjut.tushuliulang.tushuliulang.net.BOOK_SHARE;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
-import com.zjut.tushuliulang.tushuliulang.backoperate.*;
+import com.zjut.tushuliulang.tushuliulang.net.getbookshares;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,13 +58,12 @@ public class MainActivity extends ActionBarActivity
     private mycollection_f mycollection;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //测试专用 无意义
-        test();
 
         //自动登陆
         auto_login();
@@ -72,6 +76,8 @@ public class MainActivity extends ActionBarActivity
         createDirectory file = new createDirectory();
         file.create();
 
+        //测试专用 无意义
+//        test();
 
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -82,6 +88,8 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
     }
 
 
@@ -163,6 +171,12 @@ public class MainActivity extends ActionBarActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.main_search) {
             Intent intent = new Intent(this, search_activity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.main_add)
+        {
+            Intent intent = new Intent(this,add_book_share.class);
             startActivity(intent);
             return true;
         }
@@ -317,8 +331,30 @@ public class MainActivity extends ActionBarActivity
 
     //专供测试使用
     private void test() {
-//        login l = new login("201419630314","wjlwjl");
-//        l.fetch();
+    new publish().execute();
+    }
+
+    class publish extends AsyncTask<String,String,String>
+    {
+        BOOK_SHARE[] bkshare;
+        getbookshares bookshares;
+
+        @Override
+        protected String doInBackground(String... params) {
+//            bkshare = new BOOK_SHARE();
+//            bkshare.owner = "201419630314";
+//            bkshare.book_name="第一日";
+//            bkshare.isbn = "978-7-5404-6924-5";
+//            bkshare.phone="17816874920";
+//            bkshare.qq = "741763560";
+
+            bookshares = new getbookshares();
+            if(bookshares.fetch())
+            {
+//                bkshare = publish.getShare();
+            }
+            return null;
+        }
     }
 
 }

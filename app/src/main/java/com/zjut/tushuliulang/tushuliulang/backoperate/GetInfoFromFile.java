@@ -1,11 +1,8 @@
 package com.zjut.tushuliulang.tushuliulang.backoperate;
 
 import android.os.Environment;
-import android.util.Xml;
 
-import com.zjut.tushuliulang.tushuliulang.net.Downlaod;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
-import com.zjut.tushuliulang.tushuliulang.net.getImagefromNet;
 
 import org.apache.http.util.EncodingUtils;
 

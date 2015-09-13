@@ -4,10 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icontsll"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -26,6 +29,13 @@
         <activity
             android:name=".activities.login_activity"
             android:label="@string/title_activity_login_activity" >
+        </activity>
+        <activity
+            android:name=".activities.add_book_share"
+            android:label="@string/title_activity_add_book_share"
+            android:windowSoftInputMode="stateHidden"
+            >
+
         </activity>
     </application>
 

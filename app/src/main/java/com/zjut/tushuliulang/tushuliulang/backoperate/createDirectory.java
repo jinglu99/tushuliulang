@@ -3,7 +3,6 @@ package com.zjut.tushuliulang.tushuliulang.backoperate;
 import android.os.Environment;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Ben on 2015/8/24.

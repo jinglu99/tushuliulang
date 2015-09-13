@@ -16,17 +16,24 @@ public class UploadFile {
 
 
     private String posturl ="";
-    private String dir;
-    private String filename;
-    private String result;
+    private String dir="";
+    private String filename="";
+    private String result="";
+    private String postname = "";
+
     public  UploadFile(String dir,String name,int to)
     {
         this.dir = dir;
         filename = name;
         switch (to)
         {
-            case 1:
+            case 1:                  //个人信息
                 posturl = infourl;
+                postname = "picture";
+                break;
+            case 2:                  //book_share
+                posturl =TSLLURL.publichbookshareimg;
+                postname = "img";
                 break;
 
         }
@@ -60,7 +67,7 @@ public class UploadFile {
             DataOutputStream ds = new DataOutputStream(con.getOutputStream());  //output to the connection
             ds.writeBytes(twoHyphens + boundary + end);
             ds.writeBytes("Content-Disposition: form-data; " +
-                    "name=\"picture\";filename=\"" +
+                    "name=\""+postname+"\";filename=\"" +
                     filename + "\"" + end);
             ds.writeBytes(end);
           /* 取得文件的FileInputStream */

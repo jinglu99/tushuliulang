@@ -1,15 +1,12 @@
 package com.zjut.tushuliulang.tushuliulang.net;
 
-import android.os.Environment;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -130,7 +127,7 @@ public class Search
         }
 
         book = new BOOK_INFO[n];
-        Pattern pattern_book = Pattern.compile("<book>([\\s\\S]*)</book>");
+        Pattern pattern_book = Pattern.compile("<book>([\\s\\S]*?)</book>");
         Matcher match_book = pattern_book.matcher(result);
          n =0;
         while (match_book.find())
@@ -162,6 +159,8 @@ public class Search
             Matcher m_intro= p_intro.matcher(book_info);
             if(m_intro.find())
                 book[n].simpleinfo.intro = m_intro.group(1);
+
+            n++;
 
         }
 

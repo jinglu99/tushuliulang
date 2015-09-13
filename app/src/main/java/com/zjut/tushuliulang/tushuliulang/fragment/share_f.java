@@ -11,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.zjut.tushuliulang.tushuliulang.R;
-import com.zjut.tushuliulang.tushuliulang.widget.TopIcon;
 import com.zjut.tushuliulang.tushuliulang.fragment_2.share_book;
+import com.zjut.tushuliulang.tushuliulang.widget.TopIcon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
     private List<Fragment> listfragment = new ArrayList<Fragment>();
     private ViewPager viewPager;
     private TopIcon[] topIcons;
+
     private FragmentPagerAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     public share_f() {
@@ -59,6 +62,8 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
          topIcons = new TopIcon[2];
          topIcons[0] = (TopIcon)getView().findViewById(R.id.share_topicon_1);
          topIcons[1] = (TopIcon) getView().findViewById(R.id.share_topicon_2);
+
+
          for(int n = 0;n<2;n++)
          {
              topIcons[n].setOnClickListener(this);
@@ -78,6 +83,8 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
             }
         };
          viewPager.setAdapter(adapter);
+
+//         linearLayout.setOnTouchListener(this);
 
     }
 
@@ -109,6 +116,7 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
                 viewPager.setCurrentItem(1);
         }
     }
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {

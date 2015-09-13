@@ -8,6 +8,5 @@
         android:title="add"
         android:icon="@drawable/add"
         app:showAsAction="ifRoom"></item>
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+
 </menu>

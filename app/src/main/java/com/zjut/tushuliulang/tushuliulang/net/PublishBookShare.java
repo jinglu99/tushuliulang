@@ -16,53 +16,60 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Created by Ben on 2015/8/2.
+ * Created by Ben on 2015/9/2.
  */
-public class Change_Info {
-    private String stu_id;
-    private String password;
-    private STU_INFO stu_info;
-
-
-
-    private String posturl = "http://120.24.242.211/tushu/changeinfo.php";
-
+public class PublishBookShare
+{
+    private BOOK_SHARE share;
+    private String tmp = "";
+    private String url = TSLLURL.publishbookshare;
+    private boolean result = false;
     private InputStream is;
-    private String result;
 
-    public Change_Info(String stu_id, String password, STU_INFO stu_info) {
-        this.stu_id = stu_id;
-        this.password = password;
-        this.stu_info = stu_info;
-    }
 
-    /* 上传文件至Server的方法 */
-    public void uploadpic()
+    public PublishBookShare(BOOK_SHARE book_share)
     {
-
-        UploadFile uploadFile = new UploadFile(stu_info.imagedir,stu_id+".jpg",1);
-        uploadFile.uploadFile();
-        result = uploadFile.getResult();
+        share = book_share;
     }
 
-    public void Uploadinfo() {
+    public boolean add()
+    {
+        connect();
+        regexp();
+
+        return result;
+    }
+
+    private void regexp() {
+        Pattern success = Pattern.compile("<success>true</success>");
+        Matcher matcher_success = success.matcher(tmp);
+        if (matcher_success.find())
+        {
+            result = true;
+
+            Pattern number = Pattern.compile("<number>(.*)</number>");
+            Matcher matcher_number = number.matcher(tmp);
+
+            matcher_number.find();
+            share.number_order = matcher_number.group(1);
+
+        }
+    }
+
+    private void connect() {
 
 
         List<BasicNameValuePair> gets = new LinkedList<>();
-        gets.add(new BasicNameValuePair("stuid", stu_id));
-        gets.add(new BasicNameValuePair("password", password));
-        gets.add(new BasicNameValuePair("name", stu_info.Name));
-        gets.add(new BasicNameValuePair("username", stu_info.UserName));
-        gets.add(new BasicNameValuePair("college", stu_info.college));
-        gets.add(new BasicNameValuePair("class", stu_info.Class));
-        gets.add(new BasicNameValuePair("grade", stu_info.Grade));
-        gets.add(new BasicNameValuePair("motto", stu_info.Motto));
-        gets.add(new BasicNameValuePair("phone", stu_info.Phone));
-        gets.add(new BasicNameValuePair("email", stu_info.Email));
-        gets.add(new BasicNameValuePair("sex", stu_info.Sex));
-
+        gets.add(new BasicNameValuePair("owner",share.owner));
+        gets.add(new BasicNameValuePair("bookname",share.book_name));
+        gets.add(new BasicNameValuePair("isbn",share.isbn));
+        gets.add(new BasicNameValuePair("phone",share.phone));
+        gets.add(new BasicNameValuePair("qq",share.qq));
+        gets.add(new BasicNameValuePair("intro",share.intro));
 
 
         String get = URLEncodedUtils.format(gets, "UTF-8");
@@ -73,7 +80,7 @@ public class Change_Info {
             //得到HttpClient对象
             HttpClient getClient = new DefaultHttpClient();
             //得到HttpGet对象
-            HttpGet request = new HttpGet(posturl + "?" +
+            HttpGet request = new HttpGet(url + "?" +
                     get);
             //客户端使用GET方式执行请教，获得服务器端的回应response
             HttpResponse response = getClient.execute(request);
@@ -104,13 +111,13 @@ public class Change_Info {
             }
             is.close();
 
-            result = sb.toString();
+            tmp = sb.toString();
         } catch (Exception e) {
         }
     }
-
-    public String getresult()
+    public BOOK_SHARE getShare()
     {
-        return result;
+        return share;
     }
+
 }

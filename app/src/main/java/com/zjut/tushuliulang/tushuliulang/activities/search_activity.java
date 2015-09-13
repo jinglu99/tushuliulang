@@ -3,31 +3,25 @@ package com.zjut.tushuliulang.tushuliulang.activities;
 
 //书籍搜索界面
 
-import android.support.v7.app.ActionBar;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-
-import com.zjut.tushuliulang.tushuliulang.net.BOOK_INFO;
-import com.zjut.tushuliulang.tushuliulang.net.Search;
-import com.zjut.tushuliulang.tushuliulang.widget.*;
 
 import com.zjut.tushuliulang.tushuliulang.R;
+import com.zjut.tushuliulang.tushuliulang.net.BOOK_INFO;
+import com.zjut.tushuliulang.tushuliulang.net.Search;
+import com.zjut.tushuliulang.tushuliulang.widget.book_recommend_in_search_activity;
+import com.zjut.tushuliulang.tushuliulang.widget.book_view;
+import com.zjut.tushuliulang.tushuliulang.widget.can_not_find;
 
 public class search_activity extends ActionBarActivity implements View.OnClickListener {
 

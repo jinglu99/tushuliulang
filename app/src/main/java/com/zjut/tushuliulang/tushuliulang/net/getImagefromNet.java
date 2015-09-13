@@ -2,8 +2,6 @@ package com.zjut.tushuliulang.tushuliulang.net;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

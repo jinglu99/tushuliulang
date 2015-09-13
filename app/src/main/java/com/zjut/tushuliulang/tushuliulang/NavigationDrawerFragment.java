@@ -1,19 +1,17 @@
 package com.zjut.tushuliulang.tushuliulang;
 
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,8 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.activities.login_activity;
-import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
-import com.zjut.tushuliulang.tushuliulang.net.login;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.

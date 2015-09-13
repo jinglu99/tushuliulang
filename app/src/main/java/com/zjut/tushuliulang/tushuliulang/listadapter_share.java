@@ -49,22 +49,47 @@ public class listadapter_share extends BaseAdapter
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        module m = null;
-        if(convertView==null)
+        String type = (String) data.get(position).get("type");
+        if (type.equals("0")) {
+            module m = null;
+            if (convertView == null) {
+                m = new module();
+                convertView = layoutinflater.inflate(R.layout.listviewadapter, null);
+                m.image = (ImageView) convertView.findViewById(R.id.iii);
+                m.title = (TextView) convertView.findViewById(R.id.title);
+                m.text = (TextView) convertView.findViewById(R.id.text);
+
+
+                convertView.setTag(m);
+
+            } else {
+                m = (module) convertView.getTag();
+            }
+            m.title.setText((String) data.get(position).get("a"));
+            m.text.setText((String) data.get(position).get("b"));
+
+        }
+        else if(type.equals("1"))
         {
-            m = new module();
-            convertView=layoutinflater.inflate(R.layout.listviewadapter,null);
-            m.image = (ImageView)convertView.findViewById(R.id.iii);
-            m.title = (TextView)convertView.findViewById(R.id.title);
-            m.text = (TextView)convertView.findViewById(R.id.text);
-            convertView.setTag(m);
+            module m = null;
+            if (convertView == null)
+            {
+                m = new module();
+                convertView = layoutinflater.inflate(R.layout.no_more_view, null);
+                convertView.setTag(m);
+
+            } else {
+                m = (module) convertView.getTag();
+//                convertView = layoutinflater.inflate(R.layout.no_more_view, null);
+            }
 
         }
         else
         {
-//            m = (module)convertView.getTag();
+            convertView = layoutinflater.inflate(R.layout.more_view, null);
         }
-//        m.tv.setText((String)data.get(position).get("a"));
+
         return convertView;
     }
+
 }

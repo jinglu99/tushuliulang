@@ -19,4 +19,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_login_activity">登陆</string>
+    <string name="title_activity_publishbookinfo_activity">发布</string>
+    <string name="title_activity_add_book_share">发布</string>
 </resources>
