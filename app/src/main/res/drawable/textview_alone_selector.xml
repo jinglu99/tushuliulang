@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item android:state_pressed="true">
         <shape>
             <!-- 按下背景色 -->
             <solid android:color="#DCF6FB"/>
             <!-- 按下边框色 -->
-            <stroke android:width="0.5dip" android:color="#D6D6D6" />
+            <stroke android:width="0.5dip" android:color="#FFFFFF" />
         </shape>
     </item>
 
@@ -17,5 +18,4 @@
             <stroke android:width="0.5dip" android:color="#D6D6D6" />
         </shape>
     </item>
-
 </selector>

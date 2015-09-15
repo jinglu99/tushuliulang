@@ -43,6 +43,7 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
     private MaterialListView mListView;
     private boolean islistview = true;
     private TextView tv_activity_question;
+    private TextView tv_activity_describe;
     private ArrayList<RespondAndStudentID> list;
     private String questionID;
     private QuestionsEnterActivityAdapter adapter;
@@ -97,8 +98,8 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
         tv_activity_question = (TextView) findViewById(R.id.tv_activity_question);
         tv_activity_question.setText((String) getIntent().getExtras().get("question"));
 
-
-
+        tv_activity_describe = (TextView) findViewById(R.id.tv_activity_describe);
+        tv_activity_describe.setText((String) getIntent().getExtras().get("describe"));
 
 
 

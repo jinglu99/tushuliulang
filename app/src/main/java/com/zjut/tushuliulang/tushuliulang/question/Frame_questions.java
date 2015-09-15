@@ -120,7 +120,7 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
         };
 
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("uploadsuccessfully");
+        intentFilter.addAction("uploadquestionsuccessfully");
         getActivity().registerReceiver(broadcastReceiver, intentFilter);
     }
 
@@ -299,6 +299,7 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
         //转至具体问题应该携带数据，这里做了参考
         Intent intent =new Intent(getActivity(),QuestionsEnterActivity.class);
         intent.putExtra("question", list.get(position).getQuestion());
+        intent.putExtra("describe",list.get(position).getDescribe());
         intent.putExtra("questionID", list.get(position).getQuestionID());
         startActivity(intent);
 

@@ -15,8 +15,8 @@
         android:orientation="horizontal">
 
         <com.zjut.tushuliulang.tushuliulang.question.CircleImageView
-            android:layout_width="89dp"
-            android:layout_height="79dp"
+            android:layout_width="69dp"
+            android:layout_height="59dp"
             android:layout_centerInParent="true"
             app:border_width="2dp"
             app:border_color="@color/dim_foreground_disabled_material_dark"
@@ -38,7 +38,7 @@
             android:padding="10dp"
             android:text="问题"
             android:ellipsize="end"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:singleLine="true"/>
 
 
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="时间"
-        android:textSize="20sp"
+        android:textSize="16sp"
         />
 
     <TextView
@@ -63,7 +63,7 @@
         android:padding="16dp"
         android:text="内容"
         android:lines="3"
-        android:textSize="25sp"/>
+        android:textSize="16sp"/>
 
 
 </LinearLayout>

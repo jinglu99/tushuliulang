@@ -36,16 +36,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         ripple:rv_type="doubleRipple">
-        <TextView
-            android:id="@+id/tv_activity_question"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
-            android:background="@drawable/listview_selector"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="请问这个问题问的怎么样？"
-            android:textSize="18sp"/>
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_activity_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textview_alone_selector"
+                android:padding="16dp"
+                android:text="请问这个问题问的怎么样？"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/tv_activity_describe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textview_alone_selector"
+                android:textSize="16sp"
+                android:paddingLeft="35dp"
+                android:paddingRight="35dp"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:text="请问这个问题的描述怎么样？" />
+        </LinearLayout>
     </com.andexert.library.RippleView>
 
 
