@@ -2,7 +2,10 @@ package com.zjut.tushuliulang.tushuliulang.question;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -91,6 +94,34 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        initbroadcast();
+    }
+
+    private void initbroadcast() {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String s = intent.getAction();
+                switch(s)
+                {
+                    case "uploadquestionsuccessfully":
+                        //刷新
+                        Log.e("MY", "刷新，重新加载文件");
+                        //重新加载数据
+                        //清空list列表
+                        list.clear();
+                        path = "http://120.24.242.211/tushu/getquestions.php";
+                        GetData();
+                        break;
+
+                }
+            }
+        };
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("uploadsuccessfully");
+        getActivity().registerReceiver(broadcastReceiver, intentFilter);
     }
 
     /**

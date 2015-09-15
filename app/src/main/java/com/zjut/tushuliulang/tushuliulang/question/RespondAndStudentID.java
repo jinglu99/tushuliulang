@@ -9,6 +9,15 @@ public class RespondAndStudentID {
     private String studentID;
     private String questionID;
     private String date;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getDate() {
         return date;
@@ -49,6 +58,7 @@ public class RespondAndStudentID {
                 ", studentID='" + studentID + '\'' +
                 ", questionID='" + questionID + '\'' +
                 ", date='" + date + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

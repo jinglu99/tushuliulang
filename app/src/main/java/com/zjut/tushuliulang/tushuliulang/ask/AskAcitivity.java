@@ -2,6 +2,7 @@ package com.zjut.tushuliulang.tushuliulang.ask;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
+import com.zjut.tushuliulang.tushuliulang.question.Frame_questions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -267,6 +269,10 @@ public class AskAcitivity extends FragmentActivity implements View.OnClickListen
 
                         //退出提问界面
                         finish();
+                        //跳转到问题库界面
+                        Intent intent = new Intent();
+                        intent.setAction("uploadquestionsuccessfully");
+                        sendBroadcast(intent);
                     }
                 } catch (Exception e) {
 

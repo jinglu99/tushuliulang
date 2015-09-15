@@ -1,8 +1,10 @@
 package com.zjut.tushuliulang.tushuliulang.question;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -74,6 +76,7 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
         questionID = (String)getIntent().getExtras().get("questionID");
         path = "http://120.24.242.211/tushu/getanswers.php"+ "?questionid="+ URLEncoder.encode(questionID);
 
+        initbroadcast();
         //获取数据
         GetData();
 
@@ -135,6 +138,40 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
 
             }
         });
+    }
+
+    private void initbroadcast() {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String s = intent.getAction();
+                switch(s)
+                {
+                    case "uploadanswersuccessfully":
+                        //刷新
+                        //重新加载数据
+                        if(islistview == true){
+                            Log.e("MY", "对应于questionid的所有回答界面刷新");
+                            //清理卡片
+                            mListView.clear();
+                            //清空list列表
+                            list.clear();
+                            path = "http://120.24.242.211/tushu/getanswers.php"+ "?questionid="+ URLEncoder.encode(questionID);
+                            GetData();
+                        }
+                        else {
+                            Log.e("MY", "某个人的回答刷新");
+                            //不做更新，就给他们看看吧。。
+                        }
+                        break;
+
+                }
+            }
+        };
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("uploadanswersuccessfully");
+       registerReceiver(broadcastReceiver, intentFilter);
     }
 
     /**
@@ -208,6 +245,8 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
                             String studentID = xp.nextText();
                             ras.setStudentID(studentID);
                             Log.e("MY", "studentID:" + ras.getStudentID());
+                            String url =  "http://120.24.242.211/tushu/pic/"+studentID+".jpg";
+                            ras.setUrl(url);
                         }else if("respond".equals(xp.getName())){
                             String respond = xp.nextText();
                             ras.setRespond(respond);

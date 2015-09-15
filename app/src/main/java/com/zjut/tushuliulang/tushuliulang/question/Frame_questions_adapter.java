@@ -19,9 +19,6 @@ import com.zjut.tushuliulang.tushuliulang.R;
 
 import java.util.ArrayList;
 
-//import static com.zjut.tushuliulang.tushuliulang.R.id.iv_circle;
-import static com.zjut.tushuliulang.tushuliulang.R.id.iv_image;
-
 public class Frame_questions_adapter extends BaseAdapter {
    private ArrayList<QuestionAndDescribe> list;
    private Context context;
@@ -65,7 +62,7 @@ public class Frame_questions_adapter extends BaseAdapter {
                    .findViewById(R.id.tv_fragment_content);
            holder.tv_fragment_time = (TextView) convertView
                    .findViewById(R.id.tv_fragment_time);
-           holder.iv_circle = (ImageView) convertView.findViewById(iv_image);
+           holder.iv_circle = (CircleImageView) convertView.findViewById(R.id.iv_circle);
 
            convertView.setTag(holder);
        } else {
@@ -81,7 +78,7 @@ public class Frame_questions_adapter extends BaseAdapter {
        holder.tv_fragment_question.setText(qad.getQuestion());
        holder.tv_fragment_content.setText(qad.getDescribe());
        holder.tv_fragment_time.setText(qad.getDate());
-       holder.iv_circle.setImageBitmap(qad.getBitmap());
+       //holder.iv_circle.setImageBitmap(qad.getBitmap());
       /* holder.iv_delete.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -98,7 +95,6 @@ public class Frame_questions_adapter extends BaseAdapter {
      * 初始化Options设置
      * */
     private void initOptions() {
-        DisplayImageOptions options;
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.mipmap.ic_launcher) //设置图片在下载期间显示的图片
                 .showImageForEmptyUri(R.mipmap.ic_launcher)//设置图片Uri为空或是错误的时候显示的图片
@@ -117,7 +113,8 @@ public class Frame_questions_adapter extends BaseAdapter {
        TextView tv_fragment_question;
        TextView tv_fragment_content;
        TextView tv_fragment_time;
-       ImageView iv_circle;
+       //ImageView iv_circle;
+       CircleImageView iv_circle;
    }
 
     /*//删除弹框提示

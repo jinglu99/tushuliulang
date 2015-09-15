@@ -14,21 +14,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!--<com.zjut.tushuliulang.tushuliulang.widget.CircleImageView-->
-            <!--android:layout_width="89dp"-->
-            <!--android:layout_height="79dp"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--app:border_width="2dp"-->
-            <!--app:border_color="@color/dim_foreground_disabled_material_dark"-->
-            <!--android:src="@mipmap/lzy"-->
-            <!--android:id="@+id/iv_circle"-->
-            <!--/>-->
-        <ImageView
+        <com.zjut.tushuliulang.tushuliulang.question.CircleImageView
+            android:layout_width="89dp"
+            android:layout_height="79dp"
+            android:layout_centerInParent="true"
+            app:border_width="2dp"
+            app:border_color="@color/dim_foreground_disabled_material_dark"
+            android:src="@mipmap/lzy"
+            android:id="@+id/iv_circle"
+            />
+        <!--<ImageView
             android:layout_width="75dp"
             android:layout_height="70dp"
             android:scaleType="fitXY"
             android:src="@mipmap/lzy"
-            android:id="@+id/iv_image"/>
+            android:id="@+id/iv_image"/>-->
 
         <TextView
             android:layout_weight="1"

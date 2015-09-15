@@ -2,6 +2,7 @@ package com.zjut.tushuliulang.tushuliulang.question;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -81,14 +82,15 @@ public class RespondActivity extends AppCompatActivity {
                             Null_Pop_Up();
                         } else {
                             String respond = et_respond_question.getText().toString();
-                            String studentID = GetInfoFromFile.getinfo().Id;
+                            String questionID = (String) getIntent().getExtras().get("questionID");
+
                             File file = new File(Environment.getExternalStorageDirectory().getPath() + "/tushuliulang/data/info.db");
                             if (!file.exists()) {
                                 //请登录弹框
                                 Toast.makeText(RespondActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
-                                String questionID = (String) getIntent().getExtras().get("questionID");
+                                String studentID = GetInfoFromFile.getinfo().Id;
                                 //通过get提交数据
                                 SubMitData(respond, studentID, questionID);
                             }
@@ -156,6 +158,10 @@ public class RespondActivity extends AppCompatActivity {
                         Log.e("MY", "成功提交回答的数据");
 
                         finish();
+                        Intent intent = new Intent();
+                        intent.setAction("uploadanswersuccessfully");
+                        sendBroadcast(intent);
+
                     }
                 } catch (Exception e) {
 
