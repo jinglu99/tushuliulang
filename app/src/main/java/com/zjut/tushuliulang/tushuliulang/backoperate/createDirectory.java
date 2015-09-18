@@ -11,7 +11,7 @@ public class createDirectory {
     public boolean create()  {
         String rootdir = Environment.getExternalStorageDirectory().toString() + "/tushuliulang/";
         String datadir = rootdir+"data/";
-        String picdir = rootdir+"image/";
+        String picdir = rootdir+"ima        ge/";
         String collectiondir = rootdir+"favorite/";
 
         File root = new File(rootdir);

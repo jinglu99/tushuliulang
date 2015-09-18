@@ -1,6 +1,7 @@
 package com.zjut.tushuliulang.tushuliulang.fragment;
 
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.zjut.tushuliulang.tushuliulang.MainActivity;
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.net.Change_Info;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
@@ -23,8 +25,29 @@ public class mycollection_f extends Fragment {
 
         String s="no";
         private TextView textView;
-    public mycollection_f() {
+    //侧滑栏
+    private static final String ARG_SECTION_NUMBER = "section_number";
 
+    //侧滑栏
+    public static Fragment newInstance(int sectionNumber) {
+        share_f fragment = new share_f();
+        Bundle args = new Bundle();
+        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+    //侧滑栏
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((MainActivity) activity).onSectionAttached(
+                getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+    //侧滑栏
+    public mycollection_f() {
         int a;
         // Required empty public constructor
     }

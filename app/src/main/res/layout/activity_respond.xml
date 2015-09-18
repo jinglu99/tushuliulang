@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:minHeight="?attr/actionBarSize"
+    >
+
+        <TextView
+            android:textColor="@drawable/text_selector"
+            android:text="发表"
+            android:textSize="18sp"
+            android:clickable="true"
+            android:onClick="Upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_weight="10"
+            android:id="@+id/et_respond_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="亲，在这写下你的回答哦"
+            android:gravity="top"/>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
