@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <com.dexafree.materialList.card.CardLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -23,6 +22,7 @@
                 android:id="@+id/titleTextView"
                 android:textColor="@color/black_button"
                 android:padding="@dimen/big_padding"
+                android:visibility="gone"
                 />
 
             <LinearLayout
@@ -37,16 +37,19 @@
                     android:padding="@dimen/big_padding"
                     android:contentDescription="@null"
                     android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"/>
+                    android:adjustViewBounds="true"
+                    android:visibility="gone"
+                    />
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/descriptionTextView"
                     android:padding="@dimen/big_padding"
                     android:textSize="@dimen/description_size"
                     android:textColor="@color/description_color"
-                    tools:text="Lorem ipsum dolor sit amet"/>
+                    tools:text="Lorem ipsum dolor sit amet"
+                    android:layout_gravity="center"/>
 
             </LinearLayout>
 

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.dexafree.materialList.card.Card;
 import com.dexafree.materialList.card.provider.BasicListCardProvider;
 import com.dexafree.materialList.card.provider.SmallImageCardProvider;
+import com.dexafree.materialList.card.provider.User_defined;
 import com.dexafree.materialList.listeners.OnDismissCallback;
 import com.dexafree.materialList.listeners.RecyclerItemClickListener;
 import com.dexafree.materialList.view.MaterialListView;
@@ -344,9 +345,9 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
             Card card = new Card.Builder(this)
                     .setTag("SMALL_IMAGE_CARD")
                     .setDismissible()
-                    .withProvider(SmallImageCardProvider.class)
+                    .withProvider(User_defined.class)
                     //.setTitle("B卡片")
-                    .setDescription("    向右滑动得到更多回答")
+                    .setDescription("向右滑动得到更多回答")
                     //.setDrawable(R.drawable.sample_android)
                     .endConfig()
                     .build();
