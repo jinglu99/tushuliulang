@@ -1,7 +1,6 @@
 package com.zjut.tushuliulang.tushuliulang.fragment;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,14 +11,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ScrollView;
 
-import com.zjut.tushuliulang.tushuliulang.MainActivity;
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.fragment_2.share_book;
-import com.zjut.tushuliulang.tushuliulang.question.FloatingActionButton;
 import com.zjut.tushuliulang.tushuliulang.widget.TopIcon;
 
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
 package com.zjut.tushuliulang.tushuliulang.fragment;
 
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.zjut.tushuliulang.tushuliulang.MainActivity;
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.net.Change_Info;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;

@@ -26,10 +26,6 @@
         </activity>
 
         <activity
-            android:name=".MainActivity">
-        </activity>
-
-        <activity
             android:name=".activities.search_activity"
             android:label="@string/title_activity_search_activity" >
         </activity>
@@ -42,8 +38,8 @@
             android:label="@string/title_activity_add_book_share"
             android:windowSoftInputMode="stateHidden"
             >
-
         </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".question.QuestionsEnterActivity"
             android:theme="@style/AppNoActionBar">
         </activity>

@@ -59,12 +59,16 @@ public class AskAcitivity extends FragmentActivity implements View.OnClickListen
 
     private LinearLayout.LayoutParams lp;
     private final int Code_Success = 1;
+    private final int Code_Fail = 2;
 
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             if(msg.what == Code_Success){
                 Toast.makeText(AskAcitivity.this, "发表成功", Toast.LENGTH_SHORT).show();
+            }
+            if(msg.what == Code_Fail){
+                Toast.makeText(AskAcitivity.this, "发表失败", Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -136,7 +140,6 @@ public class AskAcitivity extends FragmentActivity implements View.OnClickListen
                                 finish();
                             } else {
                                 String studentID = GetInfoFromFile.getinfo().Id;
-                                Log.e("MY", "TESTdescribe:" + describe);
                                 //通过get提交数据
                                 SubMitData(question, describe, studentID);
                             }
@@ -275,9 +278,12 @@ public class AskAcitivity extends FragmentActivity implements View.OnClickListen
                         sendBroadcast(intent);
                     }
                 } catch (Exception e) {
-
-                    Toast.makeText(AskAcitivity.this, "发表失败", Toast.LENGTH_SHORT).show();
-                    Log.e("MY", "提交问题的数据失败");
+                //发送消息，吐司弹框
+                 Message message = Message.obtain();
+                 message.what = Code_Fail;
+                 handler.sendMessage(message);
+                                Log.e("MY", "提交问题的数据失败");
+                                finish();
                     e.printStackTrace();
                 }
             }
