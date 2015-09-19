@@ -74,7 +74,7 @@ public class MainActivity extends ActionBarActivity
         //自动登陆
         auto_login();
 
-        initfragment();
+//        initfragment();
         //注册广播
         initbroadcast();
 
@@ -115,57 +115,19 @@ public class MainActivity extends ActionBarActivity
         switch(position) {
             case 0:
                 currentItem = 0;
-                if (mContent!=null)
-                {
-                    fragmentManager.beginTransaction().hide(mContent).show(mycollection).commit();
-                    mContent = mycollection;
-                }
-                else
-                {
-                    mContent = PlaceholderFragment.newInstance(position+1);
-                    fragmentManager.beginTransaction().add(R.id.container, mContent).commit();
-                    fragmentManager.beginTransaction().hide(mContent).add(R.id.container, mycollection).commit();
-                    mContent = mycollection;
-                }
+                switchfragment(share);
                 break;
             case 1:
                 currentItem = 1;
-                if (frame_questions.isAdded())
-                {
-                    fragmentManager.beginTransaction().hide(mContent).show(frame_questions).commit();
-                    mContent = frame_questions;
-                }
-                else
-                {
-                    fragmentManager.beginTransaction().hide(mContent).add(R.id.container, frame_questions).commit();
-                    mContent = frame_questions;
-                }
+                switchfragment(frame_questions);
                 break;
             case 2:
                 currentItem = 2;
-                if (library.isAdded())
-                {
-                    fragmentManager.beginTransaction().hide(mContent).show(library).commit();
-                    mContent = library;
-                }
-                else
-                {
-                    fragmentManager.beginTransaction().hide(mContent).add(R.id.container,library).commit();
-                    mContent = library;
-                }
+                switchfragment(library);
                 break;
             case 3:
                 currentItem = 3;
-                if (mycollection.isAdded())
-                {
-                    fragmentManager.beginTransaction().hide(mContent).show(mycollection).commit();
-                    mContent = mycollection;
-                }
-                else
-                {
-                    fragmentManager.beginTransaction().hide(mContent).add(R.id.container,mycollection).commit();
-                    mContent = mycollection;
-                }
+               switchfragment(mycollection);
         }
 
     }
@@ -245,6 +207,31 @@ public class MainActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+
+    public void switchfragment(Fragment fragment)
+    {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if(mContent==null)
+        {
+            fragmentManager.beginTransaction().add(R.id.container,fragment).commit();
+            mContent = fragment;
+
+        }
+        else
+        {
+            if(fragment.isAdded())
+            {
+                fragmentManager.beginTransaction().hide(mContent).show(fragment).commit();
+                mContent = fragment;
+            }
+            else
+            {
+                fragmentManager.beginTransaction().hide(mContent).add(R.id.container,fragment).commit();
+                mContent = fragment;
+            }
+        }
+    }
 
     /**
      * A placeholder fragment containing a simple view.
