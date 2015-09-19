@@ -27,13 +27,19 @@ public class search_activity extends ActionBarActivity implements View.OnClickLi
 
     LinearLayout search_layout;
     LinearLayout search_recommend;
-    book_view book;
     EditText search_edit;
     Button search_button;
     ActionBar actionBar;
 
+    Context context;
 
-    Context context = this;
+
+
+
+    public search_activity() {
+        context = this;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +50,7 @@ public class search_activity extends ActionBarActivity implements View.OnClickLi
         search_edit = (EditText) this.findViewById(R.id.search_edit);
         search_button = (Button) this.findViewById(R.id.search_button);
 
-        book = new book_view(this);
+
 
 //书籍推荐ui显示
         for(int n = 0 ; n<3;n++)
@@ -124,9 +130,12 @@ public class search_activity extends ActionBarActivity implements View.OnClickLi
             search_layout.setBackgroundResource(R.drawable.dialog_background_mtrl_mult);
             if(founded)
             {
+
                 books = search.returnresult();
                 for (int n = 0; n < books.length; n++)
                 {
+
+                    book_view book = new book_view(context);
                     search_layout.setGravity(Gravity.NO_GRAVITY);
                     book.setContent(books[n]);
                     search_layout.addView(book);

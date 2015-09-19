@@ -62,13 +62,13 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
     }
 
     //侧滑栏所用
-    public static Frame_questions newInstance(int sectionNumber) {
-        Frame_questions fragment = new Frame_questions();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static Frame_questions newInstance(int sectionNumber) {
+//        Frame_questions fragment = new Frame_questions();
+//        Bundle args = new Bundle();
+//        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     /**
      * 刷新UI
@@ -155,6 +155,9 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
                         Log.e("MY", "下载完成，准备解析含有所有问题数据的xml");
                         //解析xml
                         ParseXML(is);
+
+                        if(swipeLayout!=null)
+                            swipeLayout.setRefreshing(false);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -163,6 +166,7 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
         };
 
         t.start();
+
     }
 
     /**
@@ -315,7 +319,7 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
         path = "http://120.24.242.211/tushu/getquestions.php";
         GetData();
 
-        swipeLayout.setRefreshing(false);
+
 
     }
 
@@ -323,12 +327,12 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
      *侧滑栏所用
      */
     //onAttach中通过onSectionAttached取得ARGSECTIONNUMBER对应的值并设置为title
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((MainActivity) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
-    }
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//        ((MainActivity) activity).onSectionAttached(
+//                getArguments().getInt(ARG_SECTION_NUMBER));
+//    }
 
 }
 

@@ -13,11 +13,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.zjut.tushuliulang.tushuliulang.MainActivity;
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.fragment_2.share_book;
+import com.zjut.tushuliulang.tushuliulang.question.FloatingActionButton;
 import com.zjut.tushuliulang.tushuliulang.widget.TopIcon;
 
 import java.util.ArrayList;
@@ -32,30 +34,32 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
     private List<Fragment> listfragment = new ArrayList<Fragment>();
     private ViewPager viewPager;
     private TopIcon[] topIcons;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     private FragmentPagerAdapter adapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     //侧滑栏
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     //侧滑栏
-    public static Fragment newInstance(int sectionNumber) {
-        share_f fragment = new share_f();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-
-        return fragment;
-    }
-
-    //侧滑栏
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((MainActivity) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
-    }
+//    public static Fragment newInstance(int sectionNumber) {
+//        share_f fragment = new share_f();
+//        Bundle args = new Bundle();
+//        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+//        fragment.setArguments(args);
+//
+//        return fragment;
+//    }
+//
+//    //侧滑栏
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//        ((MainActivity) activity).onSectionAttached(
+//                getArguments().getInt(ARG_SECTION_NUMBER));
+//    }
 
     //侧滑栏
     public share_f() {
@@ -83,6 +87,8 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
      private void initcontroil(View i ) {
         viewPager = (ViewPager) i.findViewById(R.id.share_viewpager);
          swipeRefreshLayout = (SwipeRefreshLayout) i.findViewById(R.id.share_swipe);
+
+
 
          topIcons = new TopIcon[2];
          topIcons[0] = (TopIcon)getView().findViewById(R.id.share_topicon_1);

@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,7 +57,7 @@ public class MainActivity extends ActionBarActivity
     private CharSequence mTitle;
     private share_f share;
     private library_f library;
-    private xinde_f xinde;
+    private Frame_questions frame_questions;
     private mycollection_f mycollection;
     private int currentItem = 0;
 
@@ -65,6 +66,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initfragment();
         setContentView(R.layout.activity_main);
 
 
@@ -99,8 +101,8 @@ public class MainActivity extends ActionBarActivity
 
 
     private void initfragment() {
-//        share = new share_f();
-        xinde = new xinde_f();
+        share = new share_f();
+        frame_questions = new Frame_questions();
         library = new library_f();
         mycollection = new mycollection_f();
 //        mContent;
@@ -110,36 +112,62 @@ public class MainActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        switch(position){
+        switch(position) {
             case 0:
                 currentItem = 0;
-                fragmentManager.beginTransaction()
-                        //newInstance产生一个fragment的实例，并传递一个键值为ARGSECTIONNUMBER的参数
-                        .replace(R.id.container, share_f.newInstance(position + 1))
-                        .commit();
+                if (mContent!=null)
+                {
+                    fragmentManager.beginTransaction().hide(mContent).show(mycollection).commit();
+                    mContent = mycollection;
+                }
+                else
+                {
+                    mContent = PlaceholderFragment.newInstance(position+1);
+                    fragmentManager.beginTransaction().add(R.id.container, mContent).commit();
+                    fragmentManager.beginTransaction().hide(mContent).add(R.id.container, mycollection).commit();
+                    mContent = mycollection;
+                }
                 break;
             case 1:
                 currentItem = 1;
-                fragmentManager.beginTransaction()
-                        //newInstance产生一个fragment的实例，并传递一个键值为ARGSECTIONNUMBER的参数
-                        .replace(R.id.container, Frame_questions.newInstance(position + 1))
-                        .commit();
+                if (frame_questions.isAdded())
+                {
+                    fragmentManager.beginTransaction().hide(mContent).show(frame_questions).commit();
+                    mContent = frame_questions;
+                }
+                else
+                {
+                    fragmentManager.beginTransaction().hide(mContent).add(R.id.container, frame_questions).commit();
+                    mContent = frame_questions;
+                }
                 break;
             case 2:
                 currentItem = 2;
-                fragmentManager.beginTransaction()
-                        //newInstance产生一个fragment的实例，并传递一个键值为ARGSECTIONNUMBER的参数
-                        .replace(R.id.container, library_f.newInstance(position + 1))
-                        .commit();
+                if (library.isAdded())
+                {
+                    fragmentManager.beginTransaction().hide(mContent).show(library).commit();
+                    mContent = library;
+                }
+                else
+                {
+                    fragmentManager.beginTransaction().hide(mContent).add(R.id.container,library).commit();
+                    mContent = library;
+                }
                 break;
             case 3:
                 currentItem = 3;
-                fragmentManager.beginTransaction()
-                        //newInstance产生一个fragment的实例，并传递一个键值为ARGSECTIONNUMBER的参数
-                        .replace(R.id.container, mycollection_f.newInstance(position + 1))
-                        .commit();
-                break;
+                if (mycollection.isAdded())
+                {
+                    fragmentManager.beginTransaction().hide(mContent).show(mycollection).commit();
+                    mContent = mycollection;
+                }
+                else
+                {
+                    fragmentManager.beginTransaction().hide(mContent).add(R.id.container,mycollection).commit();
+                    mContent = mycollection;
+                }
         }
+
     }
 
     public void onSectionAttached(int number) {

@@ -19,6 +19,7 @@ import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.listadapter_share;
 import com.zjut.tushuliulang.tushuliulang.net.BOOK_SHARE;
 import com.zjut.tushuliulang.tushuliulang.net.getbookshares;
+import com.zjut.tushuliulang.tushuliulang.question.FloatingActionButton;
 import com.zjut.tushuliulang.tushuliulang.widget.book_view;
 
 import java.util.ArrayList;
@@ -40,17 +41,9 @@ public class share_book extends Fragment {
     private BOOK_SHARE[] shares;
     private getbookshares getshares;
 
-    private LinearLayout add_more;
-    private View listfooter;
+    private FloatingActionButton add_more;
 
-    private int DownY;
-    private int LastY;
 
-    private int mListViewFirstItem = 0;
-    //listView中第一项的在屏幕中的位置
-    private int mScreenY = 0;
-    //是否向上滚动
-    private boolean mIsScrollToUp = false;
 
     public share_book() {
         // Required empty public constructor
@@ -61,20 +54,25 @@ public class share_book extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_share_book, container, false);
+        View view = inflater.inflate(R.layout.fragment_share_book,container,false);
+
+        // Inflate the layout for this fragment
         s = (SwipeRefreshLayout) getActivity().findViewById(R.id.share_swipe);
         listView = (ListView) view.findViewById(R.id.share_book_listview);
 
-        listfooter = inflater.inflate(R.layout.no_more_view,null,false);
-
-        add_more = (LinearLayout) view.findViewById(R.id.add_more);
-//        list=initlist();
-//        listView.setAdapter(new listadapter_share(getActivity(),list));
-        // Inflate the layout for this fragment
         istopped();
 
-//        listView.addFooterView(listfooter);
         new getshare().execute();
+
+
+        add_more = (FloatingActionButton) view.findViewById(R.id.fabbutton_book_share);
+        add_more.listenTo(listView);
+        add_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return view;
     }
 
