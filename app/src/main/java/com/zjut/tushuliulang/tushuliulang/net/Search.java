@@ -26,7 +26,7 @@ public class Search
 {
     private String[] searcharray;
     private String search="";
-    private String result;
+    private String result="";
     private BOOK_INFO[] book;
     private boolean founded;
 
@@ -114,54 +114,55 @@ public class Search
 
         Pattern pattern_founded =  Pattern.compile("<founded>(.*)</founded>");
         Matcher match_founded = pattern_founded.matcher(result);
-        match_founded.find();
-        int n = Integer.parseInt(match_founded.group(1));
-        if (n==0)
-        {
-            founded = false;
-            return;
+        if(match_founded.find()) {
+            int n = Integer.parseInt(match_founded.group(1));
+            if (n == 0) {
+                founded = false;
+                return;
+            } else {
+                founded = true;
+            }
+
+            book = new BOOK_INFO[n];
+            Pattern pattern_book = Pattern.compile("<book>([\\s\\S]*?)</book>");
+            Matcher match_book = pattern_book.matcher(result);
+            n = 0;
+            while (match_book.find()) {
+                String book_info = match_book.group(1);
+
+                book[n] = new BOOK_INFO();
+
+
+                Pattern p_name = Pattern.compile("<name>([\\s\\S]*)</name>");
+                Matcher m_name = p_name.matcher(book_info);
+                if (m_name.find()) {
+                    book[n].simpleinfo.name = m_name.group(1);
+                }
+
+                Pattern p_press = Pattern.compile("<press>([\\s\\S]*)</press>");
+                Matcher m_press = p_press.matcher(book_info);
+                if (m_press.find()) {
+                    book[n].simpleinfo.press = m_press.group(1);
+                }
+
+                Pattern p_code = Pattern.compile("<code>([\\s\\S]*)</code>");
+                Matcher m_code = p_code.matcher(book_info);
+                if (m_code.find())
+                    book[n].simpleinfo.code = m_code.group(1);
+
+
+                Pattern p_intro = Pattern.compile("<intro>([\\s\\S]*)</intro>");
+                Matcher m_intro = p_intro.matcher(book_info);
+                if (m_intro.find())
+                    book[n].simpleinfo.intro = m_intro.group(1);
+
+                n++;
+
+            }
         }
         else
         {
-            founded = true;
-        }
-
-        book = new BOOK_INFO[n];
-        Pattern pattern_book = Pattern.compile("<book>([\\s\\S]*?)</book>");
-        Matcher match_book = pattern_book.matcher(result);
-         n =0;
-        while (match_book.find())
-        {
-            String book_info=match_book.group(1);
-
-            book[n] = new BOOK_INFO();
-
-
-            Pattern p_name= Pattern.compile("<name>([\\s\\S]*)</name>");
-            Matcher m_name= p_name.matcher(book_info);
-            if(m_name.find()) {
-                book[n].simpleinfo.name = m_name.group(1);
-            }
-
-            Pattern p_press= Pattern.compile("<press>([\\s\\S]*)</press>");
-            Matcher m_press= p_press.matcher(book_info);
-            if(m_press.find()) {
-                book[n].simpleinfo.press = m_press.group(1);
-            }
-
-            Pattern p_code= Pattern.compile("<code>([\\s\\S]*)</code>");
-            Matcher m_code= p_code.matcher(book_info);
-            if(m_code.find())
-                book[n].simpleinfo.code = m_code.group(1);
-
-
-            Pattern p_intro= Pattern.compile("<intro>([\\s\\S]*)</intro>");
-            Matcher m_intro= p_intro.matcher(book_info);
-            if(m_intro.find())
-                book[n].simpleinfo.intro = m_intro.group(1);
-
-            n++;
-
+            founded =false;
         }
 
     }
