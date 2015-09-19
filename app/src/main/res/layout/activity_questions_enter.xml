@@ -47,7 +47,7 @@
                 android:background="@drawable/textview_alone_selector"
                 android:padding="16dp"
                 android:text="请问这个问题问的怎么样？"
-                android:textSize="24sp"/>
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/tv_activity_describe"
