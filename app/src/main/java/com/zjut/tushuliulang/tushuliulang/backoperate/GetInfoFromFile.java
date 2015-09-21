@@ -24,6 +24,10 @@ public class GetInfoFromFile
         public static STU_INFO getinfo () {
         String tmp = null;
         File file = new File(Environment.getExternalStorageDirectory().getPath() + "/tushuliulang/data/info.db");
+            if (!file.exists())
+            {
+                return null;
+            }
         try {
             FileInputStream inputStream = new FileInputStream(file);
             int length = inputStream.available();

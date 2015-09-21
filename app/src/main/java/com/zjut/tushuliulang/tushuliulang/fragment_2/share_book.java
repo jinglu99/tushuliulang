@@ -35,13 +35,13 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class share_book extends Fragment implements ListView.OnItemClickListener{
+public class share_book extends Fragment implements ListView.OnItemClickListener,SwipeRefreshLayout.OnRefreshListener{
     private List<Map<String,Object>> list;
     private ListView listView;
     private boolean istop;
     private boolean isbotton = false;
     private boolean addedfooterlish = false;
-    private SwipeRefreshLayout s;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private BOOK_SHARE[] shares;
     private getbookshares getshares;
 
@@ -61,7 +61,10 @@ public class share_book extends Fragment implements ListView.OnItemClickListener
         View view = inflater.inflate(R.layout.fragment_share_book,container,false);
 
         // Inflate the layout for this fragment
-        s = (SwipeRefreshLayout) getActivity().findViewById(R.id.share_swipe);
+        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.book_share_swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+
         listView = (ListView) view.findViewById(R.id.share_book_listview);
         listView .setOnItemClickListener(this);
 
@@ -97,9 +100,9 @@ public class share_book extends Fragment implements ListView.OnItemClickListener
                 if (firstVisibleItem == 0) {
                     Log.e("s", "top");
                     istop = true;
-                    s.setEnabled(true);
+                    swipeRefreshLayout.setEnabled(true);
                 } else {
-                    s.setEnabled(false);
+                    swipeRefreshLayout.setEnabled(false);
                 }
                 if (firstVisibleItem + visibleItemCount == totalItemCount) {
                     Log.e("s", "bottom");
@@ -127,6 +130,11 @@ public class share_book extends Fragment implements ListView.OnItemClickListener
         intent.putExtra("order",shares[position].number_order);
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onRefresh() {
+        new getshare().execute();
     }
 
 
@@ -159,13 +167,9 @@ public class share_book extends Fragment implements ListView.OnItemClickListener
         protected void onPostExecute(String s) {
             listView.setAdapter(new listadapter_share(getActivity(),l));
 
+            swipeRefreshLayout.setRefreshing(false);
 
-//            book_view book = new book_view(getActivity());
-//            for(int n=0;n<shares.length;n++)
-//            {
-//                book_view books = new book_view(getActivity());
-//                books.setContent(shares[n]);
-//                list.addView(books);
+
 //            }
         }
     }

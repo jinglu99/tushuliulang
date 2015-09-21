@@ -41,16 +41,12 @@
             android:background="#ffdcdcdc" />
     </LinearLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/share_swipe"
-        >
+
         <android.support.v4.view.ViewPager
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:id="@+id/share_viewpager"
             ></android.support.v4.view.ViewPager>
-        </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

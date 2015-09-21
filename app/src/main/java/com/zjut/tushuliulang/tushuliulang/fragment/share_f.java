@@ -34,28 +34,7 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
     private FragmentPagerAdapter adapter;
 
 
-    //侧滑栏
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
-    //侧滑栏
-//    public static Fragment newInstance(int sectionNumber) {
-//        share_f fragment = new share_f();
-//        Bundle args = new Bundle();
-//        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//        fragment.setArguments(args);
-//
-//        return fragment;
-//    }
-//
-//    //侧滑栏
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        ((MainActivity) activity).onSectionAttached(
-//                getArguments().getInt(ARG_SECTION_NUMBER));
-//    }
-
-    //侧滑栏
     public share_f() {
 
         // Required empty public constructor
@@ -80,7 +59,7 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
 
      private void initcontroil(View i ) {
         viewPager = (ViewPager) i.findViewById(R.id.share_viewpager);
-         swipeRefreshLayout = (SwipeRefreshLayout) i.findViewById(R.id.share_swipe);
+
 
 
 

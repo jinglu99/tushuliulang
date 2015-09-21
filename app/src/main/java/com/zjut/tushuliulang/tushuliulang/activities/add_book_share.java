@@ -22,11 +22,13 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
 import com.zjut.tushuliulang.tushuliulang.net.BOOK_SHARE;
 import com.zjut.tushuliulang.tushuliulang.net.PublishBookShare;
+import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
 import com.zjut.tushuliulang.tushuliulang.net.UploadFile;
 
 import java.io.FileNotFoundException;
@@ -190,6 +192,14 @@ public class add_book_share extends ActionBarActivity  {
     }
     public void add_book_share()
     {
+        STU_INFO stu_info = GetInfoFromFile.getinfo();
+
+        if (stu_info==null)
+        {
+            Toast.makeText(this,"请先登录",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         BOOK_SHARE book_share = new BOOK_SHARE();
         book_share.book_name = et_book_name.getText().toString();
         book_share.isbn = et_isbn.getText().toString();
