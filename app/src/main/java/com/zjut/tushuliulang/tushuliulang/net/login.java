@@ -36,7 +36,7 @@ public class login {
     String r="";
     InputStream is = null;
     String tmp="";
-    Boolean isenter = false;
+    String numenter = null;
 
 
     public login() {
@@ -58,10 +58,10 @@ public class login {
 
         }
     }
-    public Boolean fetch() {
+    public String fetch() {
         connect();
         regexp();
-        return isenter;
+        return numenter;
     }
 
    private void connect() {
@@ -89,6 +89,10 @@ public class login {
                 HttpEntity entity = response.getEntity();
                 is = entity.getContent();
 
+                //账号密码错误
+                Log.e("MY", "账号密码错误");
+                numenter = "账号密码错误";
+
                 //关闭输入流
 
             } else {
@@ -96,7 +100,9 @@ public class login {
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            Log.e("wonrg", "wrong");
+            Log.e("网络错误", "wrong");
+            //网络错误
+            numenter = "网络错误";
             e.printStackTrace();
         }
         try {
@@ -111,9 +117,7 @@ public class login {
 
 
             tmp = sb.toString();
-            SaveToFile s = new SaveToFile(Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/info.db",
-                    tmp);
-            s.save();
+
             is.close();
         } catch (Exception e) {
 //                    return "Fail to convert net stream!";
@@ -185,13 +189,17 @@ public class login {
 
                 stu_info.Id = username;
 
-                    isenter = true;
+
+            SaveToFile s = new SaveToFile(Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/info.db",
+                    tmp);
+            s.save();
+
+                    numenter = "登陆成功";
                    return stu_info;
 
 
         }
 
-            isenter = false;
             return new STU_INFO();
 
     }

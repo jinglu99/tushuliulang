@@ -1,115 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_bright"
-    >
-
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_login">
+    <!-- padding 内边距   layout_margin 外边距
+                    android:layout_alignParentTop 布局的位置是否处于顶部 -->
     <RelativeLayout
-        android:layout_marginTop="48dp"
-        android:id="@+id/editRel"
-        android:layout_width="wrap_content"
+        android:id="@+id/login_div"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <RelativeLayout
-            android:id="@+id/accountRel"
+        android:padding="15dip"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/background_login_div_bg"
+        >
+        <!-- 账号 -->
+        <TextView
+            android:id="@+id/login_user_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:text="账号"
+            android:textSize="16sp"
+            android:textColor="#000"/>
+        <EditText
+            android:layout_marginTop="5dp"
+            android:id="@+id/et_user"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical" >
-
-            <TextView
-                android:id="@+id/account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="账号"
-                android:layout_marginLeft="40dp"
-                android:textSize="17sp" />
-
-            <EditText
-                android:id="@+id/et_user"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/account"
-                android:hint="请输入账号"
-                android:textSize="15sp" />
-        </RelativeLayout>
-
-
-
-        <RelativeLayout
-            android:id="@+id/pwdRel"
+            android:hint="教务系统账号"
+            android:background="@drawable/editview"
+            android:padding="10dp"
+            android:layout_below="@id/login_user_input"
+            android:singleLine="true"
+            android:inputType="text"/>
+        <!-- 密码 text -->
+        <TextView
+            android:id="@+id/login_password_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_user"
+            android:layout_marginTop="10dp"
+            android:text="密码"
+            android:textSize="16sp"
+            android:textColor="#000"/>
+        <EditText
+            android:layout_marginTop="5dp"
+            android:id="@+id/et_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/accountRel"
-            android:gravity="center_vertical" >
+            android:background="@drawable/editview"
+            android:padding="10dp"
+            android:layout_below="@id/login_password_input"
+            android:password="true"
+            android:singleLine="true"
+            android:hint="教务系统密码"
+            android:inputType="textPassword"
+            />
 
-            <TextView
-                android:id="@+id/pwd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="密码"
-                android:layout_marginLeft="40dp"
-                android:textSize="17sp" />
-
-            <EditText
-                android:id="@+id/et_password"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dip"
-                android:layout_toRightOf="@id/pwd"
-                android:hint="请输入密码"
-                android:textSize="15sp"
-                android:password="true" />
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/loginRel"
-            android:layout_below="@id/pwdRel"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:layout_below="@id/et_password"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
             <CheckBox
+                android:layout_weight="1"
                 android:id="@+id/rememberinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="记住账号与密码"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
-
                 />
 
+            <!-- 登录button -->
             <Button
                 android:id="@+id/bt_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="登陆"
-                android:layout_marginLeft="250dp"
-                android:onClick="login"
+                android:text="登录"
+                android:background="@drawable/blue_button"
                 />
 
-        </RelativeLayout>
+        </LinearLayout>
+
     </RelativeLayout>
 
-    <EditText
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/wrong_info"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="账号或密码错误"
-        android:gravity="bottom|center_horizontal"
-        android:visibility="invisible"
-        android:textColor="#ff1210" />
+        android:layout_margin="20dip"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="教务系统？"
+            android:textColor="@drawable/textview_explaination"
+            android:onClick="explaination"
+            android:clickable="true"/>
+
+        <TextView
+            android:id="@+id/tv_explaination"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/explaination"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>
