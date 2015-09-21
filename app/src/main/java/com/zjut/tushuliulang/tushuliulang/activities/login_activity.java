@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
@@ -20,17 +24,19 @@ import com.zjut.tushuliulang.tushuliulang.backoperate.SaveToFile;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
 import com.zjut.tushuliulang.tushuliulang.net.login;
 
+
 public class login_activity extends ActionBarActivity implements View.OnClickListener{
 
     ActionBar actionBar;
     EditText et_username;
     EditText et_password;
     Button bt_login;
-    TextView wrong_info;
     CheckBox checkBox;
+    TextView tv_explaination;
 
     String username;
     String password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +46,21 @@ public class login_activity extends ActionBarActivity implements View.OnClickLis
 
         initwidget();
 
-
     }
-
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what == 1){
+                Toast.makeText(login_activity.this,"请输入账号和密码",Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
     private void initwidget() {
         et_username = (EditText) findViewById(R.id.et_user);
         et_password = (EditText) findViewById(R.id.et_password);
         bt_login = (Button) findViewById(R.id.bt_login);
-        wrong_info = (TextView) findViewById(R.id.wrong_info);
         checkBox = (CheckBox) findViewById(R.id.rememberinfo);
+        tv_explaination = (TextView) findViewById(R.id.tv_explaination);
 
         bt_login.setOnClickListener(this);
 
@@ -81,6 +93,14 @@ public class login_activity extends ActionBarActivity implements View.OnClickLis
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     *监听 教务系统？
+     */
+    public void explaination(View view){
+        //显示说明
+        tv_explaination.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId())
@@ -88,7 +108,13 @@ public class login_activity extends ActionBarActivity implements View.OnClickLis
             case R.id.bt_login:
                 username = et_username.getText().toString();
                 password = et_password.getText().toString();
-                if (checkBox.isChecked()==true)
+                if(username.equals("") || password.equals("")){
+                    //发送内容为空消息
+                    Message message = Message.obtain();
+                    message.what = 1;
+                    handler.sendMessage(message);
+
+                }else if (checkBox.isChecked()==true)
                 {
                     String remember = "<username>"+username+"</username>"+"<password>"+password+"</password>";
 
@@ -103,7 +129,7 @@ public class login_activity extends ActionBarActivity implements View.OnClickLis
     }
     private class login_function extends AsyncTask<String,String,String>
     {
-        boolean wrong = false;
+        String wrong = "";
 
 
         @Override
@@ -112,23 +138,25 @@ public class login_activity extends ActionBarActivity implements View.OnClickLis
           {
               login l = new login(username,password);
 
+              String message= l.fetch();
+              Log.e("MY", "message:"+message);
 
-
-              if (l.fetch())
+              if (message.equals("登陆成功"))
               {
-                  try {
-                      Thread.sleep(5000);
-                  } catch (InterruptedException e) {
-                      e.printStackTrace();
-                  }
+                  Log.e("MY", "进来吧");
+
                   finish();
+                  Toast.makeText(login_activity.this, "登录成功", Toast.LENGTH_SHORT).show();
                   Intent intent = new Intent();
                   intent.setAction("logined");
                   sendBroadcast(intent);
               }
-              else
+              else if(message.equals("网络错误"))
               {
-                  wrong = true;
+                  wrong = "网络错误";
+              }
+              else if(message.equals("账号密码错误")){
+                  wrong = "账号密码错误";
               }
           }
             return null;
@@ -138,9 +166,14 @@ public class login_activity extends ActionBarActivity implements View.OnClickLis
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if(wrong==true)
+            Log.e("MY", "wrong:"+wrong);
+            if(wrong.equals("账号密码错误"))
             {
-                wrong_info.setVisibility(View.VISIBLE);
+                Log.e("MY", "准备土司1");
+                Toast.makeText(login_activity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
+            }else if (wrong.equals("网络错误")){
+                Log.e("MY", "准备土司2");
+                Toast.makeText(login_activity.this, "网络错误", Toast.LENGTH_SHORT).show();
             }
         }
     }

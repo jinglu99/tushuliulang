@@ -28,4 +28,6 @@
     <string name="qusetion">问题</string>
     <string name="describe">描述</string>
     <string name="title_activity_book_share_info">图书</string>
+    
+    <string name="explaination">教务系统就是学校的账号密码,也就是您的学号和对应的密码，我们通过该账号密码获取您的信息以用来登录</string>
 </resources>
