@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RippleEffect/RippleEffect.iml" filepath="$PROJECT_DIR$/RippleEffect/RippleEffect.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RippleEffect/RippleEffect.iml" filepath="$PROJECT_DIR$/RippleEffect/RippleEffect.iml" />
       <module fileurl="file://$PROJECT_DIR$/UniversalImageLoader/UniversalImageLoader.iml" filepath="$PROJECT_DIR$/UniversalImageLoader/UniversalImageLoader.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/materialList/materialList.iml" filepath="$PROJECT_DIR$/materialList/materialList.iml" />

@@ -1,0 +1,147 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zjut.tushuliulang.tushuliulang.activities.add_book_share"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1"
+            android:background="@android:drawable/editbox_background_normal">
+
+            <FrameLayout
+                android:layout_width="133dp"
+                android:layout_height="172dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp">
+
+                <FrameLayout
+                    android:layout_width="100dp"
+                    android:layout_height="125dp"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/imageView3"
+                        android:layout_gravity="center"
+                        android:background="@drawable/book" />
+                </FrameLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="1">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"></FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="啊加速度克劳馥就立刻杀掉离开房间昆仑山"
+                    android:id="@+id/textView9"
+                    android:layout_weight="0.30"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="作者"
+                    android:id="@+id/textView10"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="0.14"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="出版社"
+                    android:id="@+id/textView11"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="0.14"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="0000-00-00 00:00:00 "
+                    android:id="@+id/textView12"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="0.14"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:drawable/editbox_background_normal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="图书简介："
+            android:id="@+id/textView13" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="图书简介"
+            android:id="@+id/textView14" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收藏"
+            android:id="@+id/button" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="借阅"
+            android:id="@+id/button2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+    </LinearLayout>
+
+</LinearLayout>

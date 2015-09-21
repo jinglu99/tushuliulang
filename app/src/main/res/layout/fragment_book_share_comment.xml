@@ -1,0 +1,57 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zjut.tushuliulang.tushuliulang.fragment_2.book_share_comment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:weightSum="1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="428dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.97"
+            android:background="@android:drawable/editbox_background_normal">
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/book_share_info_comment_listview"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:drawable/editbox_background_normal">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp">
+
+                <EditText
+                    android:layout_width="258dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/book_share_info_comment_ed"
+                    android:layout_gravity="left|center_vertical" />
+
+                <Button
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/book_share_info_comment_upload_bt"
+                    android:layout_gravity="right|center_vertical"
+                    android:background="@android:drawable/ic_menu_send" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

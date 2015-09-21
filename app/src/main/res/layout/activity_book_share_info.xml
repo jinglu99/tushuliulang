@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.andexert.library.RippleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ripple:rv_type="doubleRipple">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:background="#000000">
+
+            <!-- tab1 -->
+
+            <TextView
+                android:textColor="@drawable/text_selector"
+                android:id="@+id/topicon_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/qusetion" />
+
+            <!-- tab2 -->
+
+            <TextView
+                android:textColor="@drawable/text_selector"
+                android:id="@+id/topicon_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/describe" />
+            <!-- tab3 -->
+        </LinearLayout>
+    </com.andexert.library.RippleView>
+
+    <ImageView
+        android:id="@+id/book_share_inof_iv_topicon"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dip"
+        android:src="@mipmap/cursor"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/book_share_info_viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:flipInterval="30"
+            android:persistentDrawingCache="animation" />
+
+    </LinearLayout>
+
+</LinearLayout>

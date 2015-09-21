@@ -27,4 +27,5 @@
     <string name="cancle">取消</string>
     <string name="qusetion">问题</string>
     <string name="describe">描述</string>
+    <string name="title_activity_book_share_info">图书</string>
 </resources>

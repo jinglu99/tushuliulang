@@ -15,4 +15,8 @@ public class TSLLURL
     public static String getbookshares = host + "getbookshare.php";
     public static String publichbookshareimg = host + "publishbookinfouploadimg.php";
     public static String bookshareimg = host + "book_share/pic/";
+    public static String booksharecomment_book = host + "book_share_comment.php";
+    public static String booksharecomment_ppt = host + "";                             //无
+    public static String getBooksharecomment_book = host + "getbooksharecomments.php";
+    public static String getBooksharecomment_ppt = host + "";                         //无
 }

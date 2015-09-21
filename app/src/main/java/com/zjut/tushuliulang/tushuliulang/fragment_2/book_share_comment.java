@@ -1,0 +1,143 @@
+package com.zjut.tushuliulang.tushuliulang.fragment_2;
+
+
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import com.zjut.tushuliulang.tushuliulang.R;
+import com.zjut.tushuliulang.tushuliulang.listadapter_comment;
+import com.zjut.tushuliulang.tushuliulang.net.*;
+import com.zjut.tushuliulang.tushuliulang.backoperate.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class book_share_comment extends Fragment implements View.OnClickListener {
+    private View v;
+
+    private ListView comment_lv;
+    private EditText ed;
+    private Button upload;
+
+    private List<Map<String,Object>> list;
+
+    private COMMENT[] comments;
+
+    private Intent intent;
+    private String order="";
+    COMMENT comment;
+    public book_share_comment() {
+        // Required empty public constructor
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        v = inflater.inflate(R.layout.fragment_book_share_comment, container, false);
+
+        intent = getActivity().getIntent();
+        order = intent.getStringExtra("order");
+
+        comment_lv = (ListView) v.findViewById(R.id.book_share_info_comment_listview);
+        ed = (EditText) v.findViewById(R.id.book_share_info_comment_ed);
+        upload = (Button) v.findViewById(R.id.book_share_info_comment_upload_bt);
+        upload.setOnClickListener(this);
+
+        new get().execute();
+
+        return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+         comment= new COMMENT();
+        comment.shareid = order;
+        comment.stuid = GetInfoFromFile.getinfo().Id;
+        comment.comment = ed.getText().toString();
+        if (comment.comment.equals(""))
+        {
+            return;
+        }
+
+        new upload().execute();
+    }
+
+    class get extends AsyncTask<String,String,String>
+    {
+
+        private getbooksharecomment getcomments;
+        private boolean isget = false;
+        private List<Map<String,Object>> l;
+        @Override
+        protected String doInBackground(String... params) {
+            getcomments = new getbooksharecomment(order,0);
+            if (getcomments.fetch())
+            {
+                comments = getcomments.getComments();
+                isget = true;
+
+                l= new ArrayList<Map<String, Object>>();
+                for(int n = 0;n<comments.length; n++)
+                {
+                    Map<String,Object> m = new HashMap<String,Object>();
+                    m.put("stuid",comments[n].stuid);
+                    m.put("comment",comments[n].comment);
+                    m.put("date",comments[n].date);
+
+                    l.add(m);
+                }
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (isget)
+            {  comment_lv.setAdapter(new listadapter_comment(getActivity(),l));}
+        }
+    }
+
+    class upload extends AsyncTask<String,String,String>
+    {
+        private upload_book_share_comment upload;
+        boolean isupload = false;
+        @Override
+        protected String doInBackground(String... params) {
+
+            upload = new upload_book_share_comment(comment,0);
+            if (upload.fetch())
+            {
+                isupload = true;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (isupload)
+            {
+                ed.setText("");
+                new get().execute();
+            }
+        }
+    }
+}

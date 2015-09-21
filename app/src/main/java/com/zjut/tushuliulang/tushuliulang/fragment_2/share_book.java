@@ -1,6 +1,7 @@
 package com.zjut.tushuliulang.tushuliulang.fragment_2;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,11 +12,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.zjut.tushuliulang.tushuliulang.MainActivity;
 import com.zjut.tushuliulang.tushuliulang.R;
+import com.zjut.tushuliulang.tushuliulang.activities.Book_share_info;
 import com.zjut.tushuliulang.tushuliulang.listadapter_share;
 import com.zjut.tushuliulang.tushuliulang.net.BOOK_SHARE;
 import com.zjut.tushuliulang.tushuliulang.net.getbookshares;
@@ -31,7 +35,7 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class share_book extends Fragment {
+public class share_book extends Fragment implements ListView.OnItemClickListener{
     private List<Map<String,Object>> list;
     private ListView listView;
     private boolean istop;
@@ -59,6 +63,7 @@ public class share_book extends Fragment {
         // Inflate the layout for this fragment
         s = (SwipeRefreshLayout) getActivity().findViewById(R.id.share_swipe);
         listView = (ListView) view.findViewById(R.id.share_book_listview);
+        listView .setOnItemClickListener(this);
 
         istopped();
 
@@ -116,6 +121,14 @@ public class share_book extends Fragment {
         return istop;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getActivity(),Book_share_info.class);
+        intent.putExtra("order",shares[position].number_order);
+
+        startActivity(intent);
+    }
+
 
     class getshare extends AsyncTask<String,String,String>
     {
@@ -131,23 +144,11 @@ public class share_book extends Fragment {
 
                 for (int n = 0; n < shares.length; n++) {
                     Map<String, Object> map = new HashMap<String, Object>();
-                    if (n!=shares.length) {
-                        map.put("a", shares[n].book_name);
+                         map.put("a", shares[n].book_name);
                         map.put("b", shares[n].intro);
-                        map.put("i", R.drawable.abc_ab_share_pack_mtrl_alpha);
+                        map.put("i", shares[n].bitmap);
                         map.put("type","0");
-                    }
-                    else
-                    {
-                        map.put("a", "null");
-                        map.put("b", "null");
-                        map.put("i", R.drawable.abc_ab_share_pack_mtrl_alpha);
-                        map.put("type","1");
-                    }
-
-                    l.add(map);
-
-
+                         l.add(map);
                 }
 
             }

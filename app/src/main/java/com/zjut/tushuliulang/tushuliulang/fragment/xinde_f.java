@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.zjut.tushuliulang.tushuliulang.R;
-import com.zjut.tushuliulang.tushuliulang.listadapter_xinde;
+import com.zjut.tushuliulang.tushuliulang.listadapter_comment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class xinde_f extends Fragment {
         listView = (ListView) v.findViewById(R.id.xinde_lisview);
 
         list = initlist();
-        listView.setAdapter(new listadapter_xinde(getActivity(),list));
+        listView.setAdapter(new listadapter_comment(getActivity(),list));
         // Inflate the layout for this fragment
         return v;
     }
