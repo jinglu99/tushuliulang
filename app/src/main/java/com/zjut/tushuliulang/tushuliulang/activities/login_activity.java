@@ -53,6 +53,9 @@ public class login_activity extends ActionBarActivity implements View.OnClickLis
             if(msg.what == 1){
                 Toast.makeText(login_activity.this,"请输入账号和密码",Toast.LENGTH_SHORT).show();
             }
+            else if (msg.what == 2){
+                Toast.makeText(login_activity.this, "登录成功", Toast.LENGTH_SHORT).show();
+            }
         }
     };
     private void initwidget() {
@@ -146,7 +149,10 @@ public class login_activity extends ActionBarActivity implements View.OnClickLis
                   Log.e("MY", "进来吧");
 
                   finish();
-                  Toast.makeText(login_activity.this, "登录成功", Toast.LENGTH_SHORT).show();
+
+                  Message message1 = Message.obtain();
+                  message1.what = 2;
+                  handler.sendMessage(message1);
                   Intent intent = new Intent();
                   intent.setAction("logined");
                   sendBroadcast(intent);

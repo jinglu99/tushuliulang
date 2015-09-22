@@ -29,7 +29,7 @@ public class getImagefromNet {
         return bitmap;
 
     }
-        public static byte[] getImage(String path) throws IOException {
+        private static byte[] getImage(String path) throws IOException {
             URL url = new URL(path);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestMethod("GET");   //设置请求方法为GET
@@ -42,7 +42,7 @@ public class getImagefromNet {
         /*
          * 从数据流中获得数据
          */
-        public static  byte[] readInputStream(InputStream inputStream) throws IOException {
+        private static  byte[] readInputStream(InputStream inputStream) throws IOException {
             byte[] buffer = new byte[1024];
             int len = 0;
             ByteArrayOutputStream bos = new ByteArrayOutputStream();

@@ -33,9 +33,8 @@ import com.zjut.tushuliulang.tushuliulang.fragment.library_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.mycollection_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.share_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.xinde_f;
-import com.zjut.tushuliulang.tushuliulang.net.BOOK_SHARE;
-import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
-import com.zjut.tushuliulang.tushuliulang.net.getbookshares;
+import com.zjut.tushuliulang.tushuliulang.net.*;
+
 import com.zjut.tushuliulang.tushuliulang.question.Frame_questions;
 
 import java.io.File;
@@ -289,19 +288,21 @@ public class MainActivity extends ActionBarActivity
                        STU_INFO stu_info = GetInfoFromFile.getinfo();
                         ((TextView)findViewById(R.id.username_tv)).setText(stu_info.UserName);
 
+                        new getImage().execute();
+                        Downlaod.FileDownload(TSLLURL.picurl+ stu_info.Id + ".jpg", "/tushuliulang/data/", 2);
 
 
-                        try {
-                            FileInputStream image = new FileInputStream
-                                    (Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/"+stu_info.Id+".jpg");
-                            bitmap = BitmapFactory.decodeStream(image);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-
-                        if (bitmap!=null) {
-                            ((ImageView) findViewById(R.id.userimage)).setImageBitmap(bitmap);
-                        }
+//                        try {
+//                            FileInputStream image = new FileInputStream
+//                                    (Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/"+stu_info.Id+".jpg");
+//                            bitmap = BitmapFactory.decodeStream(image);
+//                        } catch (FileNotFoundException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                        if (bitmap!=null) {
+//                            ((ImageView) findViewById(R.id.userimage)).setImageBitmap(bitmap);
+//                        }
 
                         ((TextView)findViewById(R.id.username_tv)).setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -379,4 +380,27 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+    class getImage extends AsyncTask<String,String,String>
+    {
+        private String url = TSLLURL.picurl + GetInfoFromFile.getinfo().Id + ".jpg";
+        getImagefromNet image;
+        Bitmap bitmap;
+
+        @Override
+        protected String doInBackground(String... params) {
+            image = new getImagefromNet(url);
+            bitmap = image.image();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if(bitmap!=null)
+            {
+                ((ImageView) findViewById(R.id.userimage)).setImageBitmap(bitmap);
+            }
+            super.onPostExecute(s);
+        }
+    }
 }

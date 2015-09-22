@@ -185,7 +185,6 @@ public class login {
 //                if(matcher.find())
 //                    stu_info.image = new getImagefromNet(PICurl+"201419630314.jpg").image();
 
-                Downlaod.FileDownload("http://120.24.242.211/tushu/pic/"+username+".jpg","/tushuliulang/data/",2);
 
                 stu_info.Id = username;
 
