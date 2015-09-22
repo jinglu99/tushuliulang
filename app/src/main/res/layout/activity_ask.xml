@@ -78,7 +78,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="详情" />
+            android:text="问题" />
 
         <!-- tab2 -->
 
@@ -90,7 +90,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="评论" />
+            android:text="描述" />
         <!-- tab3 -->
     </LinearLayout>
     </com.andexert.library.RippleView>
