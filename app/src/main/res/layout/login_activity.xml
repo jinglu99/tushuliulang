@@ -111,9 +111,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/explaination"
-            android:visibility="gone"/>
+            android:visibility="invisible"/>
     </LinearLayout>
 
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/cat"
+        android:layout_gravity="right"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"/>
 
 </LinearLayout>

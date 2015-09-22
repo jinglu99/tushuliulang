@@ -80,6 +80,9 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
                     //设置listview适配器
                     adapter = new Frame_questions_adapter(getActivity(), list);
                     setListAdapter(adapter);
+                    if(swipeLayout!=null){
+                        swipeLayout.setRefreshing(false);
+                    }
                     break;
             }
 
@@ -152,8 +155,7 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
                         //解析xml
                         ParseXML(is);
 
-                        if(swipeLayout!=null)
-                            swipeLayout.setRefreshing(false);
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
