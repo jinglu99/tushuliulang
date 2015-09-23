@@ -17,13 +17,19 @@
             android:layout_height="428dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.97"
-            android:background="@android:drawable/editbox_background_normal">
-
+            android:background="@android:drawable/editbox_background_normal"
+            android:id="@+id/book_share_comment_layout">
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/book_share_comment_swiperefresh"
+                >
             <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/book_share_info_comment_listview"
                 android:layout_gravity="center" />
+            </android.support.v4.widget.SwipeRefreshLayout>
         </FrameLayout>
 
         <LinearLayout

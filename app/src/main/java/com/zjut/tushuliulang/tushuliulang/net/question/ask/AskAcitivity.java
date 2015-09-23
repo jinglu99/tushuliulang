@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang.ask;
+package com.zjut.tushuliulang.tushuliulang.net.question.ask;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,7 +12,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -25,7 +24,6 @@ import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
-import com.zjut.tushuliulang.tushuliulang.question.Frame_questions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

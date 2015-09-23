@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang.question;
+package com.zjut.tushuliulang.tushuliulang.net.question.question;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.zjut.tushuliulang.tushuliulang.R;
-import com.zjut.tushuliulang.tushuliulang.ask.AskAcitivity;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
 
 import java.io.ByteArrayOutputStream;

@@ -5,17 +5,23 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.listadapter_comment;
 import com.zjut.tushuliulang.tushuliulang.net.*;
 import com.zjut.tushuliulang.tushuliulang.backoperate.*;
+import com.zjut.tushuliulang.tushuliulang.net.bookshare.getbooksharecomment;
+import com.zjut.tushuliulang.tushuliulang.net.bookshare.upload_book_share_comment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,12 +31,15 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class book_share_comment extends Fragment implements View.OnClickListener {
+public class book_share_comment extends Fragment implements View.OnClickListener,SwipeRefreshLayout.OnRefreshListener {
     private View v;
 
     private ListView comment_lv;
     private EditText ed;
     private Button upload;
+    private FrameLayout layout;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView  tv;
 
     private List<Map<String,Object>> list;
 
@@ -57,6 +66,14 @@ public class book_share_comment extends Fragment implements View.OnClickListener
         ed = (EditText) v.findViewById(R.id.book_share_info_comment_ed);
         upload = (Button) v.findViewById(R.id.book_share_info_comment_upload_bt);
         upload.setOnClickListener(this);
+        layout = (FrameLayout) v.findViewById(R.id.book_share_comment_layout);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.book_share_comment_swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        tv = new TextView(getActivity());
+        tv.setText("暂无评论");
+        tv.setGravity(Gravity.CENTER);
+        layout.addView(tv);
 
         new get().execute();
 
@@ -74,15 +91,23 @@ public class book_share_comment extends Fragment implements View.OnClickListener
             return;
         }
 
+
         new upload().execute();
+    }
+
+    @Override
+    public void onRefresh() {
+        new get().execute();
     }
 
     class get extends AsyncTask<String,String,String>
     {
 
         private getbooksharecomment getcomments;
+        private GetStuInfo getStuInfo;
         private boolean isget = false;
         private List<Map<String,Object>> l;
+
         @Override
         protected String doInBackground(String... params) {
             getcomments = new getbooksharecomment(order,0);
@@ -91,11 +116,22 @@ public class book_share_comment extends Fragment implements View.OnClickListener
                 comments = getcomments.getComments();
                 isget = true;
 
+
+
                 l= new ArrayList<Map<String, Object>>();
                 for(int n = 0;n<comments.length; n++)
                 {
+                    String name = comments[n].stuid;
+
+                    getStuInfo = new GetStuInfo(comments[n].stuid);
+                    if (getStuInfo.fetch())
+                    {
+                        name = getStuInfo.getStu_info().UserName;
+                    }
+
                     Map<String,Object> m = new HashMap<String,Object>();
                     m.put("stuid",comments[n].stuid);
+                    m.put("username",name);
                     m.put("comment",comments[n].comment);
                     m.put("date",comments[n].date);
 
@@ -110,8 +146,20 @@ public class book_share_comment extends Fragment implements View.OnClickListener
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+
             if (isget)
-            {  comment_lv.setAdapter(new listadapter_comment(getActivity(),l));}
+            {
+                tv.setVisibility(View.INVISIBLE);
+                comment_lv.setAdapter(new listadapter_comment(getActivity(), l));
+            }
+            else
+            {
+                tv.setVisibility(View.VISIBLE);
+            }
+            swipeRefreshLayout.setRefreshing(false);
+
+
         }
     }
 

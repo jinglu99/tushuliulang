@@ -15,7 +15,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,16 +25,17 @@ import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.activities.add_book_share;
 import com.zjut.tushuliulang.tushuliulang.activities.search_activity;
-import com.zjut.tushuliulang.tushuliulang.ask.AskAcitivity;
+import com.zjut.tushuliulang.tushuliulang.net.question.ask.AskAcitivity;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
 import com.zjut.tushuliulang.tushuliulang.backoperate.createDirectory;
 import com.zjut.tushuliulang.tushuliulang.fragment.library_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.mycollection_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.share_f;
-import com.zjut.tushuliulang.tushuliulang.fragment.xinde_f;
 import com.zjut.tushuliulang.tushuliulang.net.*;
 
-import com.zjut.tushuliulang.tushuliulang.question.Frame_questions;
+import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
+import com.zjut.tushuliulang.tushuliulang.net.bookshare.getbookshares;
+import com.zjut.tushuliulang.tushuliulang.net.question.question.Frame_questions;
 
 import java.io.File;
 import java.io.FileInputStream;

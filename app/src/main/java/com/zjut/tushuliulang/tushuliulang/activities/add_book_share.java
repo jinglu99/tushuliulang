@@ -26,8 +26,8 @@ import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
-import com.zjut.tushuliulang.tushuliulang.net.BOOK_SHARE;
-import com.zjut.tushuliulang.tushuliulang.net.PublishBookShare;
+import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
+import com.zjut.tushuliulang.tushuliulang.net.bookshare.PublishBookShare;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
 import com.zjut.tushuliulang.tushuliulang.net.UploadFile;
 

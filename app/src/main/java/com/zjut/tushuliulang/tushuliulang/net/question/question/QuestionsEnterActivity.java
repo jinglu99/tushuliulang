@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang.question;
+package com.zjut.tushuliulang.tushuliulang.net.question.question;
 
 
 import android.content.BroadcastReceiver;
@@ -9,10 +9,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Xml;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -38,7 +42,8 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/9/1 0001.
  */
-public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener
+{
 
     private Context mContext;
     private MaterialListView mListView;
@@ -129,17 +134,19 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
                 Log.e("MY", "本次获得answerid值为:" + next);
                 //右滑监听,加载数据
 
-                if(next.equals("0")){
+                if (next.equals("0")) {
                     LoadDateCard();
-                }else {
+                } else {
                     Log.e("MY", "提交增加answerid");
                     mListView.clear();
-                    path = "http://120.24.242.211/tushu/getanswers.php"+ "?questionid="+ URLEncoder.encode(questionID)+"&answerid="+ URLEncoder.encode(next);
+                    path = "http://120.24.242.211/tushu/getanswers.php" + "?questionid=" + URLEncoder.encode(questionID) + "&answerid=" + URLEncoder.encode(next);
                     GetData();
                 }
 
             }
         });
+
+
     }
 
     private void initbroadcast() {
@@ -416,5 +423,6 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
             }
             swipeLayout.setRefreshing(false);
         }
+
 
 }

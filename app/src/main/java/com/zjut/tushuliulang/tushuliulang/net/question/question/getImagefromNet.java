@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang.question;
+package com.zjut.tushuliulang.tushuliulang.net.question.question;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

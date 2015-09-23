@@ -1,13 +1,11 @@
-package com.zjut.tushuliulang.tushuliulang.question;
+package com.zjut.tushuliulang.tushuliulang.net.question.question;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;

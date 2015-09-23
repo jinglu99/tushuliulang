@@ -32,9 +32,9 @@
                     <ImageView
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:id="@+id/imageView3"
+                        android:id="@+id/book_share_info_iv"
                         android:layout_gravity="center"
-                        android:background="@drawable/book" />
+                         />
                 </FrameLayout>
             </FrameLayout>
 
@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="啊加速度克劳馥就立刻杀掉离开房间昆仑山"
-                    android:id="@+id/textView9"
+                    android:id="@+id/book_share_info_bookname"
                     android:layout_weight="0.30"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -62,8 +62,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="作者"
-                    android:id="@+id/textView10"
+                    android:text=""
+                    android:id="@+id/book_share_info_editor"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="0.14"
                     android:gravity="center" />
@@ -72,8 +72,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="出版社"
-                    android:id="@+id/textView11"
+                    android:text=""
+                    android:id="@+id/book_share_info_press"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="0.14"
                     android:gravity="center" />
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="0000-00-00 00:00:00 "
-                    android:id="@+id/textView12"
+                    android:id="@+id/book_share_info_date"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="0.14"
                     android:gravity="center" />
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="图书简介"
-            android:id="@+id/textView14" />
+            android:id="@+id/book_share_info_intro" />
 
     </LinearLayout>
 

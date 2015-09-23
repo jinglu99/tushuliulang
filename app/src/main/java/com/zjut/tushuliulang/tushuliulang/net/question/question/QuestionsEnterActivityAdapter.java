@@ -1,9 +1,8 @@
-package com.zjut.tushuliulang.tushuliulang.question;
+package com.zjut.tushuliulang.tushuliulang.net.question.question;
 
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

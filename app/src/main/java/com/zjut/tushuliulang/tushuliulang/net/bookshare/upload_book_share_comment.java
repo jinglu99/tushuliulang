@@ -1,6 +1,9 @@
-package com.zjut.tushuliulang.tushuliulang.net;
+package com.zjut.tushuliulang.tushuliulang.net.bookshare;
 
 import android.util.Log;
+
+import com.zjut.tushuliulang.tushuliulang.net.COMMENT;
+import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,7 +25,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Ben on 2015/9/21.
  */
-public class upload_book_share_comment {
+public class  upload_book_share_comment {
     private String url ;
     private boolean result = false;
     private String shareid="";

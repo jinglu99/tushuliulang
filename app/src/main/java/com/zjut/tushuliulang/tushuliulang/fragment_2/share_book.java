@@ -8,23 +8,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.zjut.tushuliulang.tushuliulang.MainActivity;
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.activities.Book_share_info;
 import com.zjut.tushuliulang.tushuliulang.listadapter_share;
-import com.zjut.tushuliulang.tushuliulang.net.BOOK_SHARE;
-import com.zjut.tushuliulang.tushuliulang.net.getbookshares;
-import com.zjut.tushuliulang.tushuliulang.question.FloatingActionButton;
-import com.zjut.tushuliulang.tushuliulang.widget.book_view;
+import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
+import com.zjut.tushuliulang.tushuliulang.net.bookshare.getbookshares;
+import com.zjut.tushuliulang.tushuliulang.net.question.question.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -154,7 +149,7 @@ public class share_book extends Fragment implements ListView.OnItemClickListener
                     Map<String, Object> map = new HashMap<String, Object>();
                          map.put("a", shares[n].book_name);
                         map.put("b", shares[n].intro);
-                        map.put("i", shares[n].bitmap);
+                        map.put("i", shares[n].number_order);
                         map.put("type","0");
                          l.add(map);
                 }

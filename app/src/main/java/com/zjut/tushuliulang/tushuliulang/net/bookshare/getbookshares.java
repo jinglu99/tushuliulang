@@ -1,6 +1,9 @@
-package com.zjut.tushuliulang.tushuliulang.net;
+package com.zjut.tushuliulang.tushuliulang.net.bookshare;
 
 import android.util.Log;
+
+import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
+import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -155,8 +158,8 @@ public class getbookshares
                 matcher_intro.find();
                 shares[n].intro = matcher_intro.group(1);
 
-                getImagefromNet getImagefromNet = new getImagefromNet(TSLLURL.bookshareimg+shares[n].number_order+".jpg");
-                shares[n].bitmap = getImagefromNet.image();
+//                getImagefromNet getImagefromNet = new getImagefromNet(TSLLURL.bookshareimg+shares[n].number_order+".jpg");
+//                shares[n].bitmap = getImagefromNet.image();
 
                 result = true;
                 n++;

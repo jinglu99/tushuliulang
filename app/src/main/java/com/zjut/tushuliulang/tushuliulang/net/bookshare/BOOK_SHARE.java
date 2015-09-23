@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang.net;
+package com.zjut.tushuliulang.tushuliulang.net.bookshare;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -20,5 +20,6 @@ public class BOOK_SHARE
     public String intro = "";
     public String date = "";
     public String imagedir="";
+    public String available = "";
     public Bitmap bitmap=null;
 }

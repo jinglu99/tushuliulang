@@ -1,6 +1,9 @@
-package com.zjut.tushuliulang.tushuliulang.net;
+package com.zjut.tushuliulang.tushuliulang.net.bookshare;
 
 import android.util.Log;
+
+import com.zjut.tushuliulang.tushuliulang.net.COMMENT;
+import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.net.BOOK_INFO;
-import com.zjut.tushuliulang.tushuliulang.net.BOOK_SHARE;
+import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
 
 //书籍搜索界面显示结果的view
 
