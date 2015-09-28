@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,7 +29,7 @@ import java.net.URLEncoder;
 /**
  * Created by Administrator on 2015/9/3 0003.
  */
-public class RespondActivity extends AppCompatActivity {
+public class RespondActivity extends ActionBarActivity {
 
     private EditText et_respond_question ;
 
@@ -49,14 +52,26 @@ public class RespondActivity extends AppCompatActivity {
         et_respond_question = (EditText) findViewById(R.id.et_respond_question);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_respond, menu);
+        return true;
+    }
 
-    /**
-     * 监听发表按钮
-     */
-    public void Upload(View v){
-        String respond = et_respond_question.getText().toString();
-        //弹框提示
-        Upload_Pop_Up();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.Upload){
+            //上传回答
+           // String respond = et_respond_question.getText().toString();
+            //弹框提示
+            Upload_Pop_Up();
+            return true;
+        }else if (id == R.id.home){
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -114,7 +129,7 @@ public class RespondActivity extends AppCompatActivity {
      */
     public void Null_Pop_Up(){
         new AlertDialog.Builder(this).setTitle("空内容提示")
-                .setMessage("请确定在回答栏以及学号处输入你的内容")
+                .setMessage("请确定已在回答栏输入你的内容")
                 .setPositiveButton("确定", null)
                 .show();
     }

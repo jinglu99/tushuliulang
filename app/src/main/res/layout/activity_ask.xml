@@ -5,58 +5,6 @@
     xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-
-        <com.andexert.library.RippleView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ripple:rv_type="doubleRipple">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:background="#14DDDD"
-                android:minHeight="?attr/actionBarSize"
-                >
-
-                <TextView
-                    android:textColor="@drawable/text_selector"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cancle"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_marginLeft="30dp"
-                    android:onClick="Back"
-                    android:clickable="true"
-                    />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/I_want_ask_question"
-                    android:textColor="#000"
-                    android:textSize="25sp"
-                    android:gravity="center"/>
-
-
-                <TextView
-                    android:textColor="@drawable/text_selector"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/upload"
-                    android:textSize="18sp"
-                    android:layout_marginRight="30dp"
-                    android:onClick="Upload"
-                    android:clickable="true"
-                    />
-
-            </LinearLayout>
-        </com.andexert.library.RippleView>
-
-
     <com.andexert.library.RippleView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
