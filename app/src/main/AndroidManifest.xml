@@ -44,22 +44,20 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".net.question.question.QuestionsEnterActivity"
-            android:theme="@style/AppNoActionBar" >
+            android:name=".net.question.question.QuestionsEnterActivity">
         </activity>
         <activity
-            android:name=".net.question.question.RespondActivity"
-            android:theme="@style/AppNoActionBar" >
+            android:name=".net.question.question.RespondActivity">
         </activity>
         <activity
-            android:name=".net.question.ask.AskAcitivity"
-            android:theme="@style/AppNoActionBar"
-             >
+            android:name=".net.question.ask.AskAcitivity">
         </activity>
         <activity
             android:name=".activities.Book_share_info"
             android:label="@string/title_activity_book_share_info" >
 
+        </activity>
+        <activity android:name=".activities.changestuinfo_activity">
         </activity>
     </application>
 

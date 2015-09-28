@@ -21,6 +21,7 @@
             app:border_width="2dp"
             app:border_color="@color/dim_foreground_disabled_material_dark"
             android:src="@mipmap/lzy"
+            android:layout_marginTop="10dp"
             android:id="@+id/iv_circle"
             />
         <!--<ImageView

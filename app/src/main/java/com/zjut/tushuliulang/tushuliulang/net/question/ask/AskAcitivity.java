@@ -12,9 +12,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,7 +42,7 @@ import java.util.Date;
 /**
  * Created by Administrator on 2015/8/30 0030.
  */
-public class AskAcitivity extends FragmentActivity implements View.OnClickListener{
+public class AskAcitivity extends ActionBarActivity implements View.OnClickListener{
 
     private TextView tv_table_question, tv__table_describe;
     private ArrayList<Fragment> listFragment;
@@ -81,20 +84,24 @@ public class AskAcitivity extends FragmentActivity implements View.OnClickListen
         init();
     }
 
-    /**
-     *发表按钮监听
-     */
-    public void Upload(View v){
-        //弹框询问
-        Upload_Pop_Up();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_ask, menu);
+        return true;
     }
 
-    /**
-     *取消按钮监听
-     */
-    public void Back(View v){
-        //返回界面
-        finish();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.Upload){
+            //弹框询问
+            Upload_Pop_Up();
+            return true;
+        }else if (id == R.id.home){
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -102,7 +109,7 @@ public class AskAcitivity extends FragmentActivity implements View.OnClickListen
      */
     public void Null_Pop_Up(){
         new AlertDialog.Builder(this).setTitle("空内容提示")
-                .setMessage("请确定在问题栏以及学号处输入内容")
+                .setMessage("请确定已在问题栏输入内容")
                 .setPositiveButton("确定", null)
                 .show();
     }

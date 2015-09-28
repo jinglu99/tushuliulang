@@ -7,31 +7,6 @@
     android:orientation="vertical">
 
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#000000"
-            android:minHeight="?attr/actionBarSize"
-            >
-                <TextView
-                    android:onClick="Respond"
-                    android:textColor="@drawable/text_selector"
-                    android:text="我要回答"
-                    android:textSize="18sp"
-                    android:clickable="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-
-                    android:layout_centerVertical="true"
-                />
-
-        </RelativeLayout>
-
-
-
     <com.andexert.library.RippleView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,7 +34,8 @@
                 android:paddingRight="35dp"
                 android:paddingBottom="16dp"
                 android:paddingTop="16dp"
-                android:text="请问这个问题的描述怎么样？" />
+                android:text="请问这个问题的描述怎么样？"
+                android:visibility="gone"/>
         </LinearLayout>
     </com.andexert.library.RippleView>
 

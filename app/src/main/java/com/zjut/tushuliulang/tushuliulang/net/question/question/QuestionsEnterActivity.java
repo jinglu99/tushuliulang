@@ -9,14 +9,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Xml;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -29,6 +28,7 @@ import com.dexafree.materialList.listeners.OnDismissCallback;
 import com.dexafree.materialList.listeners.RecyclerItemClickListener;
 import com.dexafree.materialList.view.MaterialListView;
 import com.zjut.tushuliulang.tushuliulang.R;
+import com.zjut.tushuliulang.tushuliulang.activities.changestuinfo_activity;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -42,7 +42,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/9/1 0001.
  */
-public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener
+public class QuestionsEnterActivity extends ActionBarActivity implements SwipeRefreshLayout.OnRefreshListener
 {
 
     private Context mContext;
@@ -105,7 +105,14 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
         tv_activity_question.setText((String) getIntent().getExtras().get("question"));
 
         tv_activity_describe = (TextView) findViewById(R.id.tv_activity_describe);
-        tv_activity_describe.setText((String) getIntent().getExtras().get("describe"));
+        if(((String) getIntent().getExtras().get("describe")).equals("")){
+
+        }else {
+            Log.e("MY", "describe有内容");
+            tv_activity_describe.setVisibility(View.VISIBLE);
+            tv_activity_describe.setText((String) getIntent().getExtras().get("describe"));
+        }
+
 
 
 
@@ -148,6 +155,33 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_questions_enter, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.answer){
+            /*//跳转至回答界面
+            Intent intent = new Intent(this,RespondActivity.class);
+            intent.putExtra("questionID",questionID);
+            startActivity(intent);*/
+            //测试新界面
+            Intent intent = new Intent(this,changestuinfo_activity.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.home){
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     private void initbroadcast() {
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -294,16 +328,6 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
 
 
     /**
-     *监听我要回答按钮
-     */
-    public void Respond(View v){
-        //跳转至回答界面
-        Intent intent = new Intent(this,RespondActivity.class);
-        intent.putExtra("questionID",questionID);
-        startActivity(intent);
-    }
-
-    /**
      * 问题与多个回答界面
      */
     public void ListViewCard(){
@@ -316,33 +340,37 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
             list.add("item" + i);
         }*/
 
-        adapter = new QuestionsEnterActivityAdapter(this,list);
+        if(list.isEmpty()){
+            Log.e("MY", "无内容界面");
 
-        Card card = new Card.Builder(this)
-                .setTag("LIST_CARD")
-                .setDismissible()
-                .withProvider(BasicListCardProvider.class)
-                .setTitle("大家的回答")
-                //.setDescription("点击得到更多人回答")
-                .setAdapter(adapter)
-                .setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Log.e("MY", "费尽千辛万苦终于成功监听");
-                        String respond = list.get(position).getRespond();
-                        String studentID = list.get(position).getStudentID();
-                        String date = list.get(position).getDate();
-                        EnterListViewCard(studentID , respond , date);
-                    }
-                })
-                .endConfig()
-                .build();
+        }else {
+            adapter = new QuestionsEnterActivityAdapter(this,list);
+
+            Card card = new Card.Builder(this)
+                    .setTag("LIST_CARD")
+                    .setDismissible()
+                    .withProvider(BasicListCardProvider.class)
+                    .setAdapter(adapter)
+                    .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Log.e("MY", "费尽千辛万苦终于成功监听");
+                            String respond = list.get(position).getRespond();
+                            String studentID = list.get(position).getStudentID();
+                            String date = list.get(position).getDate();
+                            EnterListViewCard(studentID , respond , date);
+                        }
+                    })
+                    .endConfig()
+                    .build();
 
 
-        islistview = true;
-        mListView.add(card);
-        //增加加载数据卡片
-        LoadDateCard();
+            islistview = true;
+            mListView.add(card);
+            //增加加载数据卡片
+            LoadDateCard();
+        }
+
     }
 
     /**
