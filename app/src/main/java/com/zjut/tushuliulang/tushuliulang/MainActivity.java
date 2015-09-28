@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.activities.add_book_share;
 import com.zjut.tushuliulang.tushuliulang.activities.search_activity;
-import com.zjut.tushuliulang.tushuliulang.net.question.ask.AskAcitivity;
+import com.zjut.tushuliulang.tushuliulang.question.ask.AskAcitivity;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
 import com.zjut.tushuliulang.tushuliulang.backoperate.createDirectory;
 import com.zjut.tushuliulang.tushuliulang.fragment.library_f;
@@ -35,7 +35,7 @@ import com.zjut.tushuliulang.tushuliulang.net.*;
 
 import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
 import com.zjut.tushuliulang.tushuliulang.net.bookshare.getbookshares;
-import com.zjut.tushuliulang.tushuliulang.net.question.question.Frame_questions;
+import com.zjut.tushuliulang.tushuliulang.question.question.Frame_questions;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,10 +1,70 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.zjut.tushuliulang.tushuliulang.fragment.library_f">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="library" />
 
-</FrameLayout>
+    <com.andexert.library.RippleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ripple:rv_type="doubleRipple">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:background="#ffdcdcdc">
+
+            <!-- tab1 -->
+
+            <TextView
+                android:textColor="@drawable/text_selector"
+                android:id="@+id/topicon_borrow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="我借的书" />
+
+            <!-- tab2 -->
+
+            <TextView
+                android:textColor="@drawable/text_selector"
+                android:id="@+id/topicon_my"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="我发布的" />
+            <!-- tab3 -->
+        </LinearLayout>
+    </com.andexert.library.RippleView>
+    <ImageView
+        android:id="@+id/library_f_iv_topicon"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dip"
+        android:src="@mipmap/cursor"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/library_f_viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:flipInterval="30"
+            android:persistentDrawingCache="animation" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

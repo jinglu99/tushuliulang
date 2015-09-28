@@ -1,4 +1,5 @@
-package com.zjut.tushuliulang.tushuliulang.net.question.ask;
+package com.zjut.tushuliulang.tushuliulang.question.ask;
+
 
 
 import android.os.Bundle;
@@ -10,15 +11,16 @@ import android.view.ViewGroup;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 
+
 /**
  * Created by Administrator on 2015/8/31 0031.
  */
-public class Frame_describe extends Fragment {
+public class Frame_ask_question extends Fragment {
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_describe,null);
+        View v = inflater.inflate(R.layout.fragment_ask_question,null);
         return v;
     }
 }

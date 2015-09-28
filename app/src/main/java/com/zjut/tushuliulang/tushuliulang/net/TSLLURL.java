@@ -21,4 +21,5 @@ public class TSLLURL
     public static String getBooksharecomment_ppt = host + "";                         //无
     public static String getBookShareInfo = host + "getbookshareinfo.php";
     public static String getstuinfo = host + "getstuinfo.php";
+    public static String getanswers = host + "getanswers.php";
 }

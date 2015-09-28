@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang.net.question.question;
+package com.zjut.tushuliulang.tushuliulang.question.question;
 
 
 import android.content.BroadcastReceiver;
@@ -9,14 +9,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Xml;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -29,6 +25,7 @@ import com.dexafree.materialList.listeners.OnDismissCallback;
 import com.dexafree.materialList.listeners.RecyclerItemClickListener;
 import com.dexafree.materialList.view.MaterialListView;
 import com.zjut.tushuliulang.tushuliulang.R;
+import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -81,7 +78,7 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
         mListView = (MaterialListView) findViewById(R.id.material_listview);
         list = new ArrayList<RespondAndStudentID>();
         questionID = (String)getIntent().getExtras().get("questionID");
-        path = "http://120.24.242.211/tushu/getanswers.php"+ "?questionid="+ URLEncoder.encode(questionID);
+        path = TSLLURL.getanswers + "?questionid="+ URLEncoder.encode(questionID);
 
         initbroadcast();
         //获取数据
@@ -139,7 +136,7 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
                 } else {
                     Log.e("MY", "提交增加answerid");
                     mListView.clear();
-                    path = "http://120.24.242.211/tushu/getanswers.php" + "?questionid=" + URLEncoder.encode(questionID) + "&answerid=" + URLEncoder.encode(next);
+                    path = TSLLURL.getanswers + "?questionid=" + URLEncoder.encode(questionID) + "&answerid=" + URLEncoder.encode(next);
                     GetData();
                 }
 
@@ -414,7 +411,7 @@ public class QuestionsEnterActivity extends AppCompatActivity implements SwipeRe
                 mListView.clear();
                 //清空list列表
                 list.clear();
-                path = "http://120.24.242.211/tushu/getanswers.php"+ "?questionid="+ URLEncoder.encode(questionID);
+                path = TSLLURL.getanswers + "?questionid="+ URLEncoder.encode(questionID);
                 GetData();
             }
             else {

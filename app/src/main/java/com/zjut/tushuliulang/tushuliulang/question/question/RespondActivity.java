@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang.net.question.question;
+package com.zjut.tushuliulang.tushuliulang.question.question;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

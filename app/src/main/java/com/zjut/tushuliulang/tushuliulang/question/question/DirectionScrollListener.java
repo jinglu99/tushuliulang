@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.zjut.tushuliulang.tushuliulang.net.question.question;
+package com.zjut.tushuliulang.tushuliulang.question.question;
 
 import android.view.View;
 import android.widget.AbsListView;

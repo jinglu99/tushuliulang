@@ -44,15 +44,15 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".net.question.question.QuestionsEnterActivity"
+            android:name=".question.question.QuestionsEnterActivity"
             android:theme="@style/AppNoActionBar" >
         </activity>
         <activity
-            android:name=".net.question.question.RespondActivity"
+            android:name=".question.question.RespondActivity"
             android:theme="@style/AppNoActionBar" >
         </activity>
         <activity
-            android:name=".net.question.ask.AskAcitivity"
+            android:name=".question.ask.AskAcitivity"
             android:theme="@style/AppNoActionBar"
              >
         </activity>
