@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.03"
-        android:background="@android:drawable/bottom_bar">
+        android:background="@android:drawable/bottom_bar"
+        android:id="@+id/changestuinfo">
 
         <com.zjut.tushuliulang.tushuliulang.widget.CircleImageView
             android:layout_width="89dp"
@@ -33,7 +34,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <TextView
                 android:layout_width="127dp"

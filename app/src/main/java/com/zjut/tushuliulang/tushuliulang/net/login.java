@@ -180,10 +180,10 @@ public class login {
                 if(matcher.find())
                     stu_info.Sex = matcher.group(1);
 
-//                pattern = Pattern.compile("<pic>(.*)</pic>");
-//                matcher = pattern.matcher(tmp);
-//                if(matcher.find())
-//                    stu_info.image = new getImagefromNet(PICurl+"201419630314.jpg").image();
+                pattern = Pattern.compile("<major>(.*)</major>");
+                matcher = pattern.matcher(tmp);
+                if(matcher.find())
+                    stu_info.major = matcher.group(1);
 
 
                 stu_info.Id = username;

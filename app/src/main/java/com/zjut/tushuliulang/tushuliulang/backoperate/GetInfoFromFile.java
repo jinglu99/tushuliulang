@@ -105,6 +105,12 @@ public class GetInfoFromFile
             if (matcher.find())
                 stu_info.Sex = matcher.group(1);
 
+            pattern = Pattern.compile("<major>(.*)</major>");
+            matcher = pattern.matcher(tmp);
+            if(matcher.find())
+                stu_info.major = matcher.group(1);
+
+
 
         }
 

@@ -61,6 +61,10 @@
             android:label="@string/title_activity_book_share_info" >
 
         </activity>
+        <activity android:name=".activities.changestuinfo_activity"
+            android:label="个人信息"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
+            />
     </application>
 
 </manifest>

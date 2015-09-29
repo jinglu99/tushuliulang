@@ -19,4 +19,5 @@ public class STU_INFO {
     public Bitmap image=null;
     public String imagedir = "";
     public String password = "";
+    public String major = "";
 }

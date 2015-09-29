@@ -21,9 +21,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.activities.add_book_share;
+import com.zjut.tushuliulang.tushuliulang.activities.changestuinfo_activity;
 import com.zjut.tushuliulang.tushuliulang.activities.search_activity;
 import com.zjut.tushuliulang.tushuliulang.question.ask.AskAcitivity;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
@@ -41,6 +43,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import static com.zjut.tushuliulang.tushuliulang.R.drawable.lzy;
+
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -48,6 +52,7 @@ public class MainActivity extends ActionBarActivity
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
+
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Fragment mContent;
     /**
@@ -278,7 +283,7 @@ public class MainActivity extends ActionBarActivity
     {
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
             @Override
-            public void onReceive(Context context, Intent intent) {
+            public void onReceive(final Context context, Intent intent) {
                 String s = intent.getAction();
 
                 switch (s)
@@ -304,20 +309,26 @@ public class MainActivity extends ActionBarActivity
 //                            ((ImageView) findViewById(R.id.userimage)).setImageBitmap(bitmap);
 //                        }
 
-                        ((TextView)findViewById(R.id.username_tv)).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // 跳转到个人信息activity
-
-                            }
-                        });
+//                        ((LinearLayout)findViewById(R.id.changestuinfo)).setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                // 跳转到个人信息activity
+//                                Intent intent = new Intent(context,changestuinfo_activity.class);
+//                                startActivity(intent);
+//                            }
+//                        });
                         break;
+                    case "quit":
+
+                        ((TextView)findViewById(R.id.username_tv)).setText("未登陆");
+                        ((ImageView) findViewById(R.id.userimage)).setImageResource(R.drawable.lzy);
 
                 }
             }
         };
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("logined");
+        intentFilter.addAction("quit");
         registerReceiver(broadcastReceiver,intentFilter);
     }
     private void auto_login()
@@ -342,14 +353,17 @@ public class MainActivity extends ActionBarActivity
                 ((ImageView) findViewById(R.id.userimage)).setImageBitmap(bitmap);
             }
 
-            ((TextView)findViewById(R.id.username_tv)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // 跳转到个人信息activity
-
-                }
-            });
+//            ((LinearLayout)findViewById(R.id.changestuinfo)).setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    // 跳转到个人信息activity
+//                    Intent intent = new Intent(MainActivity.this,changestuinfo_activity.class);
+//                    startActivity(intent);
+//                }
+//            });
         }
+
+
     }
 
     //专供测试使用

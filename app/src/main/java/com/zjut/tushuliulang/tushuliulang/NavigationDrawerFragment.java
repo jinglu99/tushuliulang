@@ -26,7 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zjut.tushuliulang.tushuliulang.activities.login_activity;
+import com.zjut.tushuliulang.tushuliulang.activities.*;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -130,8 +130,18 @@ public class NavigationDrawerFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getActivity(),login_activity.class);
-                startActivity(intent);
+                if(username.getText().equals("未登陆")) {
+                    Intent intent = new Intent(getActivity(), login_activity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(getActivity(),changestuinfo_activity.class);
+                    startActivity(intent);
+                }
+
+
+
             }
         });
 

@@ -1,6 +1,9 @@
 package com.zjut.tushuliulang.tushuliulang.net;
 
+import android.os.Environment;
 import android.util.Log;
+
+import com.zjut.tushuliulang.tushuliulang.backoperate.SaveToFile;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -42,7 +45,9 @@ public class Change_Info {
     public void uploadpic()
     {
 
-        UploadFile uploadFile = new UploadFile(stu_info.imagedir,stu_id+".jpg",1);
+        UploadFile uploadFile = new UploadFile(Environment.getExternalStorageDirectory()+
+                "/tushuliulang/date/"+stu_id+".jpg"
+                ,stu_id+".jpg",1);
         uploadFile.uploadFile();
         result = uploadFile.getResult();
     }
@@ -105,6 +110,10 @@ public class Change_Info {
             is.close();
 
             result = sb.toString();
+
+
+
+
         } catch (Exception e) {
         }
     }
