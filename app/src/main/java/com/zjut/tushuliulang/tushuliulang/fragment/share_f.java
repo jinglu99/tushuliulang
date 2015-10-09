@@ -63,18 +63,12 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
 
 
 
-         topIcons = new TopIcon[2];
-         topIcons[0] = (TopIcon)getView().findViewById(R.id.share_topicon_1);
-         topIcons[1] = (TopIcon) getView().findViewById(R.id.share_topicon_2);
 
 
-         for(int n = 0;n<2;n++)
-         {
-             topIcons[n].setOnClickListener(this);
-         }
+
          viewPager.setOnPageChangeListener(this);
         listfragment.add(new share_book());
-        listfragment.add(new share_book());
+
         adapter = new FragmentPagerAdapter(getActivity().getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
@@ -95,8 +89,7 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
-        topIcons[i].setalpha(1-v);
-        topIcons[1-i].setalpha(v);
+
     }
 
     @Override
@@ -111,14 +104,7 @@ public class share_f extends Fragment implements ViewPager.OnPageChangeListener,
 
     @Override
     public void onClick(View v) {
-        switch(v.getId())
-        {
-            case R.id.share_topicon_1:
-                viewPager.setCurrentItem(0);
-                break;
-            case R.id.share_topicon_2:
-                viewPager.setCurrentItem(1);
-        }
+
     }
 
 

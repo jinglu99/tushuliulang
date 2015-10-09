@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.fragment_2.*;
+import com.zjut.tushuliulang.tushuliulang.library.ui.borrow_f2;
+import com.zjut.tushuliulang.tushuliulang.library.ui.lend_f2;
 
 
 import java.util.ArrayList;
@@ -112,8 +114,8 @@ public class library_f extends Fragment  implements ViewPager.OnPageChangeListen
         imageView_topicon = (ImageView) view.findViewById(R.id.library_f_iv_topicon);
 
         list_fragment = new ArrayList<>();
-        list_fragment.add(new mycollection_f());
-        list_fragment.add(new mycollection_f());
+        list_fragment.add(new borrow_f2());
+        list_fragment.add(new lend_f2());
 
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);

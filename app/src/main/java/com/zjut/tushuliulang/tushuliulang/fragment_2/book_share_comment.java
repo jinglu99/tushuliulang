@@ -20,8 +20,8 @@ import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.listadapter_comment;
 import com.zjut.tushuliulang.tushuliulang.net.*;
 import com.zjut.tushuliulang.tushuliulang.backoperate.*;
-import com.zjut.tushuliulang.tushuliulang.net.bookshare.getbooksharecomment;
-import com.zjut.tushuliulang.tushuliulang.net.bookshare.upload_book_share_comment;
+import com.zjut.tushuliulang.tushuliulang.bookshare.getbooksharecomment;
+import com.zjut.tushuliulang.tushuliulang.bookshare.upload_book_share_comment;
 
 import java.util.ArrayList;
 import java.util.HashMap;

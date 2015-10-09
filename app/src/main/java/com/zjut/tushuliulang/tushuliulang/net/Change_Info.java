@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Ben on 2015/8/2.
@@ -27,10 +29,11 @@ public class Change_Info {
     private String stu_id;
     private String password;
     private STU_INFO stu_info;
+    private String error = "";
 
 
 
-    private String posturl = "http://120.24.242.211/tushu/changeinfo.php";
+    private String posturl = TSLLURL.changeinfo;
 
     private InputStream is;
     private String result;
@@ -46,13 +49,13 @@ public class Change_Info {
     {
 
         UploadFile uploadFile = new UploadFile(Environment.getExternalStorageDirectory()+
-                "/tushuliulang/date/"+stu_id+".jpg"
+                "/tushuliulang/data/"+stu_id+".jpg"
                 ,stu_id+".jpg",1);
         uploadFile.uploadFile();
         result = uploadFile.getResult();
     }
 
-    public void Uploadinfo() {
+    public boolean Uploadinfo() {
 
 
         List<BasicNameValuePair> gets = new LinkedList<>();
@@ -116,10 +119,32 @@ public class Change_Info {
 
         } catch (Exception e) {
         }
+
+        Pattern pattern_info = Pattern.compile("<result_info>(.*)</result_info>");
+        Matcher matcher_ifno = pattern_info.matcher(result);
+        if (matcher_ifno.find())
+        {
+            String r = matcher_ifno.group(1);
+            if (r.equals("true"))
+            {
+                error = "no_error";
+                return true;
+            }
+            else
+            {
+                error = "inputwrong";
+            }
+        }
+        else
+        {
+            error = "no_network_connection";
+        }
+        return false;
     }
 
     public String getresult()
     {
         return result;
     }
+    public String getError(){return error;}
 }

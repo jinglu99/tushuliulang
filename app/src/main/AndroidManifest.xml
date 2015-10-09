@@ -34,8 +34,8 @@
         </activity>
         <activity
             android:name=".activities.login_activity"
-            android:theme="@style/AppNoActionBar"
-            android:label="@string/title_activity_login_activity" >
+            android:label="@string/title_activity_login_activity"
+            android:theme="@style/AppNoActionBar" >
         </activity>
         <activity
             android:name=".activities.add_book_share"
@@ -43,28 +43,32 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity android:name=".MainActivity" />
-        <activity
-            android:name=".question.question.QuestionsEnterActivity"
-            android:theme="@style/AppNoActionBar" >
+        <activity android:name=".question.question.QuestionsEnterActivity" >
         </activity>
-        <activity
-            android:name=".question.question.RespondActivity"
-            android:theme="@style/AppNoActionBar" >
+        <activity android:name=".question.question.RespondActivity" >
         </activity>
-        <activity
-            android:name=".question.ask.AskAcitivity"
-            android:theme="@style/AppNoActionBar"
-             >
+        <activity android:name=".question.ask.AskAcitivity" >
         </activity>
         <activity
             android:name=".activities.Book_share_info"
             android:label="@string/title_activity_book_share_info" >
-
         </activity>
-        <activity android:name=".activities.changestuinfo_activity"
+        <activity
+            android:name=".activities.changestuinfo_activity"
             android:label="个人信息"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
-            />
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".library.ui.book_info_library"
+            android:label="@string/title_activity_book_info_library" >
+        </activity>
+        <activity
+            android:name=".activities.lendInfo"
+            android:label="@string/title_activity_lend_info" >
+        </activity>
+        <activity
+            android:name=".activities.book_info_search"
+            android:label="@string/title_activity_book_info_search" >
+        </activity>
     </application>
 
 </manifest>

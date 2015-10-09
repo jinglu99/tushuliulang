@@ -9,15 +9,17 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.MainActivity;
 import com.zjut.tushuliulang.tushuliulang.R;
-import com.zjut.tushuliulang.tushuliulang.download.Thread_Downlaod;
+import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +28,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -36,7 +39,7 @@ import java.net.URL;
  */
 public class activity_Splash extends Activity {
     private TextView tv_version;
-    String path = "http://120.24.242.211/tushu/update/update.json";
+    String path = TSLLURL.getupdate;
 
     private String mversionName;
     private String mdescription;
@@ -48,6 +51,9 @@ public class activity_Splash extends Activity {
     private final int Code_Error_Internet = 3;
     private final int Code_Error_JSON = 4;
 
+    static int current;
+
+    private boolean iscancle = false;
 
     ProgressDialog progressDialog;
 
@@ -186,11 +192,11 @@ public class activity_Splash extends Activity {
                             long useTime = endTime - startTime;
                             //保证闪屏页时间为5秒
 
-                            if(useTime < 5000){
-                                Log.e("MY", "闪屏页面5秒睡眠开始");
+                            if(useTime < 2000){
+                                Log.e("MY", "闪屏页面2秒睡眠开始");
                                 try {
-                                    Thread.sleep(5000 - useTime);
-                                    Log.e("MY", "闪屏页面5秒睡眠结束");
+                                    Thread.sleep(2000 - useTime);
+                                    Log.e("MY", "闪屏页面2秒睡眠结束");
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -307,35 +313,34 @@ public class activity_Splash extends Activity {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMessage("正在下载更新");
         progressDialog.show();
+        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                //禁止安装
+                iscancle =true;
+                //退出当前界面
+                finish();
+                //调到主界面
+                skipMainActivity();
+            }
+        });
 
-        Thread t = new Thread(){
+        //下载并安装apk
+        Mythread t = new Mythread(mdownload, progressDialog){
             @Override
             public void run() {
-
-                //下载apk
-                Log.e("MY", "准备下载更新版本APK文件");
-                File file = Thread_Downlaod.FileDownload(mdownload, 3, progressDialog);
-                Log.e("MY", "APK文件下载完成");
-                try {
-                    //这里下载过快，先让它睡一会
-                    Log.e("MY", "线程睡眠8秒，保证进度条弹框正常进行");
-                    sleep(8000);
-                    Log.e("MY", "线程睡眠8秒结束");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                //安装apk
-                Log.e("MY", "准备安装APK");
-                installApk(file);
-                Log.e("MY", "APK安装完毕");
-                //结束进度条
-                Log.e("MY", "进度条弹框结束");
-                progressDialog.dismiss();
-
+                super.run();
             }
         };
+
         t.start();
 
+    }
+
+    //文件名
+    public static String Spilt(String path){
+        int idx = path.lastIndexOf("/");
+        return path.substring(idx + 1, path.length());
     }
 
     /**
@@ -359,6 +364,7 @@ public class activity_Splash extends Activity {
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 
+
     /**
      *对安装返回键处理
      */
@@ -368,4 +374,74 @@ public class activity_Splash extends Activity {
         skipMainActivity();
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    //自定义线程
+    class Mythread extends Thread {
+
+        private String path;
+        private ProgressDialog progressDialog;
+
+        public Mythread(String path, ProgressDialog progressDialog) {
+            this.path = path;
+            this.progressDialog = progressDialog;
+        }
+
+        @Override
+        public void run() {
+            File file = null;
+            try {
+                URL url = new URL(path);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setReadTimeout(5000);
+                conn.setConnectTimeout(5000);
+                if(conn.getResponseCode() == 200) {
+                    int length = conn.getContentLength();
+
+                    String updatadir = Environment.getExternalStorageDirectory().toString() + "/tushuliulang/update/";
+                    File filedir = new File(updatadir);
+                    //若是不存在此文件夹，创建此文件夹
+                    if (!filedir.exists()){
+                        filedir.mkdir();
+                    }
+                    file = new File(Environment.getExternalStorageDirectory().getPath() + "/tushuliulang/update",Spilt(mdownload));
+
+                    //设置进度条最大值
+                    progressDialog.setMax(length);
+                    InputStream is = conn.getInputStream();
+                    RandomAccessFile raf = new RandomAccessFile(file,"rwd");
+
+                    byte[] b =new byte[1024];
+                    int len = 0;
+                    int total =0;
+                    while((len=is.read(b))!=-1) {
+                        raf.write(b,0,len);
+                        total+=len;
+                        current += len;
+
+                        //设置进度条当前值
+                        progressDialog.setProgress(current);
+                    }
+                    Log.e("MY", "本次APK下载了：" + total);
+                    raf.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                //如果按了退出键，则停止安装
+                if (!iscancle){
+                    //安装apk
+                    Log.e("MY", "准备安装APK");
+                    //结束进度条
+                    Log.e("MY", "进度条弹框结束");
+                    progressDialog.dismiss();
+                    installApk(file);
+                    Log.e("MY", "APK安装完毕");
+                }
+
+            }
+        }
+    }
 }
+
+

@@ -35,6 +35,10 @@ public class UploadFile {
                 posturl =TSLLURL.publichbookshareimg;
                 postname = "img";
                 break;
+            case 3:
+                posturl = TSLLURL.uploadbookinfoimg;
+                postname="img";
+                break;
 
         }
 

@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.zjut.tushuliulang.tushuliulang.R;
+import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -110,7 +111,7 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
                         //重新加载数据
                         //清空list列表
                         list.clear();
-                        path = "http://120.24.242.211/tushu/getquestions.php";
+                        path = TSLLURL.getquestions;
                         GetData();
                         break;
 
@@ -192,7 +193,7 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
                         }else if("studentID".equals(xp.getName())){
                             String studentID = xp.nextText();
                             qad.setStudentID(studentID);
-                            String url = "http://120.24.242.211/tushu/pic/"+studentID+".jpg";
+                            String url =TSLLURL.picurl +studentID+".jpg";
                             qad.setUrl(url);
                            // qad.setBitmap(new getImagefromNet(url).image());
                         } else if ("questionid".equals(xp.getName())) {
@@ -252,7 +253,7 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v=inflater.inflate(R.layout.fragment_questions,null);
-        path = "http://120.24.242.211/tushu/getquestions.php";
+        path = TSLLURL.getquestions;
         list = new ArrayList<QuestionAndDescribe>();
         mlistview = (ListView) v.findViewById(android.R.id.list);
 
@@ -280,7 +281,7 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
                 //加载数据
                 //每次加载20个数据
                 Log.e("MY", "本次获得的next值为：" + next);
-                path = "http://120.24.242.211/tushu/getquestions.php"+"?id="+
+                path = TSLLURL.getquestions+"?id="+
                         URLEncoder.encode(next);
                 //未解决：每次加载后都会跳至listview最上方，第一：不能在getdata后面设置，有线程，
                 // 第二：在handler中出现严重卡顿
@@ -314,7 +315,7 @@ public class Frame_questions extends ListFragment implements SwipeRefreshLayout.
         //重新加载数据
         //清空list列表
         list.clear();
-        path = "http://120.24.242.211/tushu/getquestions.php";
+        path =TSLLURL.getquestions;
         GetData();
 
 

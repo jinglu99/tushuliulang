@@ -1,9 +1,8 @@
-package com.zjut.tushuliulang.tushuliulang.net.bookshare;
+package com.zjut.tushuliulang.tushuliulang.library.net;
 
 import android.util.Log;
 
 import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
-import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,23 +22,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Ben on 2015/9/2.
+ * Created by Ben on 2015/10/5.
  */
-public class PublishBookShare
+public class deleteLendInfo
 {
-    private BOOK_SHARE share;
     private String tmp = "";
-    private String url = TSLLURL.publishbookshare;
-    private boolean result = false;
     private InputStream is;
+    private boolean result = false;
+
+    private String shareid = "";
+    private String stuid = "";
 
 
-    public PublishBookShare(BOOK_SHARE book_share)
+    public deleteLendInfo(String shareid,String stuid)
     {
-        share = book_share;
+        this.shareid = shareid;
+        this.stuid = stuid;
     }
 
-    public boolean add()
+    public boolean deleteinfo()
     {
         connect();
         regexp();
@@ -47,43 +48,25 @@ public class PublishBookShare
         return result;
     }
 
-    private void regexp() {
-        Pattern success = Pattern.compile("<success>true</success>");
-        Matcher matcher_success = success.matcher(tmp);
-        if (matcher_success.find())
-        {
-            result = true;
-
-            Pattern number = Pattern.compile("<number>(.*)</number>");
-            Matcher matcher_number = number.matcher(tmp);
-
-            matcher_number.find();
-            share.number_order = matcher_number.group(1);
-
-        }
-    }
-
     private void connect() {
-
-
         List<BasicNameValuePair> gets = new LinkedList<>();
-        gets.add(new BasicNameValuePair("owner",share.owner));
-        gets.add(new BasicNameValuePair("bookname",share.book_name));
-        gets.add(new BasicNameValuePair("isbn",share.isbn));
-        gets.add(new BasicNameValuePair("phone",share.phone));
-        gets.add(new BasicNameValuePair("qq",share.qq));
-        gets.add(new BasicNameValuePair("intro",share.intro));
+        gets.add(new BasicNameValuePair("stuid", stuid));
+        gets.add(new BasicNameValuePair("shareid",shareid));
+
 
 
         String get = URLEncodedUtils.format(gets, "UTF-8");
-//        HttpGet getmethod = new HttpGet(TSLLURL.search + '?' + get);
+//        HttpGet getmethod = new HttpGet(url + '?' + get);
 
+        InputStream is = null;
 
         try {
             //得到HttpClient对象
             HttpClient getClient = new DefaultHttpClient();
+
+
             //得到HttpGet对象
-            HttpGet request = new HttpGet(url + "?" +
+            HttpGet request = new HttpGet(TSLLURL.deleteLendInfo + "?" +
                     get);
             //客户端使用GET方式执行请教，获得服务器端的回应response
             HttpResponse response = getClient.execute(request);
@@ -102,7 +85,6 @@ public class PublishBookShare
         } catch (Exception e) {
             // TODO Auto-generated catch block
             Log.e("wonrg", "wrong");
-
             e.printStackTrace();
         }
         try {
@@ -112,15 +94,31 @@ public class PublishBookShare
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
-            is.close();
+
+
+
 
             tmp = sb.toString();
+
+
+            is.close();
         } catch (Exception e) {
+//                    return "Fail to convert net stream!";
         }
+
     }
-    public BOOK_SHARE getShare()
-    {
-        return share;
+
+    private void regexp() {
+        Pattern pattern = Pattern.compile("<result>(.*)</result>");
+        Matcher matcher = pattern.matcher(tmp);
+        if(matcher.find())
+        {
+            if(matcher.group(1).equals("true"))
+            {
+                result = true;
+                return;
+            }
+        }
     }
 
 }

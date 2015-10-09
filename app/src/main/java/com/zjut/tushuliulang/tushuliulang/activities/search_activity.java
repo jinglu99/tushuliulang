@@ -26,7 +26,7 @@ import com.zjut.tushuliulang.tushuliulang.widget.can_not_find;
 public class search_activity extends ActionBarActivity implements View.OnClickListener {
 
     LinearLayout search_layout;
-    LinearLayout search_recommend;
+
     EditText search_edit;
     Button search_button;
     ActionBar actionBar;
@@ -45,22 +45,10 @@ public class search_activity extends ActionBarActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_activity);
 
-        search_recommend = (LinearLayout) this.findViewById(R.id.search_recommemd);
+
         search_layout = (LinearLayout) this.findViewById(R.id.search_result);
         search_edit = (EditText) this.findViewById(R.id.search_edit);
         search_button = (Button) this.findViewById(R.id.search_button);
-
-
-
-//书籍推荐ui显示
-        for(int n = 0 ; n<3;n++)
-        {
-            book_recommend_in_search_activity book_recommend = new book_recommend_in_search_activity(this);
-//            book_recommend.setcontent("",null,"",null);
-            search_recommend.addView(book_recommend);
-        }
-
-
 
         search_button.setOnClickListener(this);
 

@@ -136,25 +136,25 @@ public class Search
                 Pattern p_name = Pattern.compile("<name>([\\s\\S]*)</name>");
                 Matcher m_name = p_name.matcher(book_info);
                 if (m_name.find()) {
-                    book[n].simpleinfo.name = m_name.group(1);
+                    book[n].name = m_name.group(1);
                 }
 
                 Pattern p_press = Pattern.compile("<press>([\\s\\S]*)</press>");
                 Matcher m_press = p_press.matcher(book_info);
                 if (m_press.find()) {
-                    book[n].simpleinfo.press = m_press.group(1);
+                    book[n].press = m_press.group(1);
                 }
 
                 Pattern p_code = Pattern.compile("<code>([\\s\\S]*)</code>");
                 Matcher m_code = p_code.matcher(book_info);
                 if (m_code.find())
-                    book[n].simpleinfo.code = m_code.group(1);
+                    book[n].code = m_code.group(1);
 
 
                 Pattern p_intro = Pattern.compile("<intro>([\\s\\S]*)</intro>");
                 Matcher m_intro = p_intro.matcher(book_info);
                 if (m_intro.find())
-                    book[n].simpleinfo.intro = m_intro.group(1);
+                    book[n].intro = m_intro.group(1);
 
                 n++;
 

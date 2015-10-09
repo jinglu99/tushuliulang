@@ -3,28 +3,40 @@ package com.zjut.tushuliulang.tushuliulang.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.R;
-import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
-import com.zjut.tushuliulang.tushuliulang.backoperate.SaveToFile;
+import com.zjut.tushuliulang.tushuliulang.backoperate.*;
+
 import com.zjut.tushuliulang.tushuliulang.net.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by zz on 2015/9/25.
@@ -46,6 +58,11 @@ public class changestuinfo_activity extends ActionBarActivity{
 
     private int mod = 0;
     private STU_INFO stuinfo;
+
+    private String imagedir = "";
+
+    private static int RESULT_LOAD_IMAGE = 1;
+    private static int RESULT_CAMERA=2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +87,39 @@ public class changestuinfo_activity extends ActionBarActivity{
         exit = (Button) findViewById(R.id.quit);
 
         imageView.setFocusable(true);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mod == 1) {
+                    CharSequence[] items = {"本地", "相机"};
+                    AlertDialog dialog = new AlertDialog.Builder(changestuinfo_activity.this)
+                            .setItems(items, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (which) {
+                                        case 0:
+                                            Intent i = new Intent(
+                                                    Intent.ACTION_PICK,
+                                                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                                            startActivityForResult(i, RESULT_LOAD_IMAGE);
+                                            break;
+                                        case 1:
+                                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                            startActivityForResult(intent, RESULT_CAMERA);
+
+                                    }
+
+                                }
+                            }).create();
+                    Window window = dialog.getWindow();
+                    window.setGravity(Gravity.BOTTOM);  //此处可以设置dialog显示的位置
+
+                    dialog.show();
+
+                }
+            }
+        });
 
 
         name.setEnabled(false);
@@ -136,7 +186,68 @@ public class changestuinfo_activity extends ActionBarActivity{
             imageView.setImageBitmap(bitmap);
         }
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+
+            imagedir = Environment.getExternalStorageDirectory().getPath() + "/tushuliulang/data/" +
+                    stuinfo.Id + ".jpg";
+
+            Copyfile.copyFile(picturePath,imagedir);
+
+            imageView.setImageBitmap(BitmapFactory.decodeFile(imagedir));
+
+        }
+        else if(requestCode == RESULT_CAMERA&& resultCode==RESULT_OK&&data!=null)
+        {
+            String sdStatus = Environment.getExternalStorageState();
+            if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+                Log.i("TestFile",
+                        "SD card is not avaiable/writeable right now.");
+                return;
+            }
+            String name = stuinfo.Id + ".jpg";
+//                        Toast.makeText(this, name, Toast.LENGTH_LONG).show();
+            Bundle bundle = data.getExtras();
+            Bitmap bitmap = (Bitmap) bundle.get("data");// 获取相机返回的数据，并转换为Bitmap图片格式
+
+            FileOutputStream b = null;
+            //???????????????????????????????为什么不能直接保存在系统相册位置呢？？？？？？？？？？？？
+
+            String fileName = Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/"+name;
+
+            try {
+                b = new FileOutputStream(fileName);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    b.flush();
+                    b.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            imageView.setImageBitmap(bitmap);// 将图片显示在ImageView里
+            imagedir = fileName;
+
+        }
+
+    }
 
 
     @Override
@@ -151,7 +262,7 @@ public class changestuinfo_activity extends ActionBarActivity{
         int id = item.getItemId();
         switch (id)
         {
-            case R.id.editinfo:
+            case R.id.answer:
                 if (mod == 0) {
                     name.setEnabled(true);
 
@@ -223,6 +334,7 @@ public class changestuinfo_activity extends ActionBarActivity{
     class changge extends AsyncTask<String,String,String>
     {
         private Change_Info change_info;
+        private boolean result = false;
         @Override
         protected String doInBackground(String... params) {
             change_info = new Change_Info(stuinfo.Id,stuinfo.password,stuinfo);
@@ -240,45 +352,64 @@ public class changestuinfo_activity extends ActionBarActivity{
                     "\t\t\t<sex>"+stuinfo.Sex+"</sex>\n" +
                     "\t\t\t<pic></pic>\n" +
                     "\t\t\t<stu_id>"+stuinfo.Id+"</stu_id></stu>\n";
-            SaveToFile s = new SaveToFile(Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/info.db",
-                 str   );
-            s.save();
-            change_info.Uploadinfo();
-            Intent intent = new Intent();
-            intent.setAction("logined");
-            sendBroadcast(intent);
+
+            if (change_info.Uploadinfo()) {
+                change_info.uploadpic();
+
+                SaveToFile sa = new SaveToFile(Environment.getExternalStorageDirectory().getPath()+"/tushuliulang/data/info.db",
+                        str   );
+                sa.save();
+
+                Intent intent = new Intent();
+                intent.setAction("logined");
+                sendBroadcast(intent);
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
             return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
-            mod=0;
 
-            imageView.setFocusable(true);
+           if (result) {
+               mod = 0;
 
-            name.setEnabled(false);
+               imageView.setFocusable(true);
 
-            username.setEnabled(false);
+               name.setEnabled(false);
 
-            college.setEnabled(false);
+               username.setEnabled(false);
 
-            stuclass.setEnabled(false);
+               college.setEnabled(false);
 
-            grade.setEnabled(false);
+               stuclass.setEnabled(false);
 
-            motto.setEnabled(false);
+               grade.setEnabled(false);
 
-            phone.setEnabled(false);
+               motto.setEnabled(false);
 
-            email.setEnabled(false);
+               phone.setEnabled(false);
 
-            sex.setEnabled(false);
+               email.setEnabled(false);
 
-            major.setEnabled(false);
+               sex.setEnabled(false);
 
-            exit.setVisibility(View.VISIBLE);
-            super.onPostExecute(s);
+               major.setEnabled(false);
+
+               exit.setVisibility(View.VISIBLE);
+               Toast.makeText(changestuinfo_activity.this,"修改成功",Toast.LENGTH_SHORT).show();
+               super.onPostExecute(s);
+           }
+            else
+           {
+               Toast.makeText(changestuinfo_activity.this,"账号或密码错误",Toast.LENGTH_SHORT).show();
+           }
         }
     }
+
 }
 

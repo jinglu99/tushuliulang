@@ -21,9 +21,9 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.AbsListView;
 
-import com.zjut.tushuliulang.tushuliulang.R;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.view.ViewHelper;
+import com.zjut.tushuliulang.tushuliulang.R;
 
 //import com.nineoldandroids.animation.ObjectAnimator;
 //import com.nineoldandroids.view.ViewHelper;

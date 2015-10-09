@@ -21,11 +21,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.activities.add_book_share;
-import com.zjut.tushuliulang.tushuliulang.activities.changestuinfo_activity;
+import com.zjut.tushuliulang.tushuliulang.activities.lendInfo;
 import com.zjut.tushuliulang.tushuliulang.activities.search_activity;
 import com.zjut.tushuliulang.tushuliulang.question.ask.AskAcitivity;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
@@ -35,15 +34,13 @@ import com.zjut.tushuliulang.tushuliulang.fragment.mycollection_f;
 import com.zjut.tushuliulang.tushuliulang.fragment.share_f;
 import com.zjut.tushuliulang.tushuliulang.net.*;
 
-import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
-import com.zjut.tushuliulang.tushuliulang.net.bookshare.getbookshares;
+import com.zjut.tushuliulang.tushuliulang.bookshare.BOOK_SHARE;
+import com.zjut.tushuliulang.tushuliulang.bookshare.getbookshares;
 import com.zjut.tushuliulang.tushuliulang.question.question.Frame_questions;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import static com.zjut.tushuliulang.tushuliulang.R.drawable.lzy;
 
 
 public class MainActivity extends ActionBarActivity
@@ -94,6 +91,7 @@ public class MainActivity extends ActionBarActivity
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
+        onSectionAttached(0);
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
@@ -133,21 +131,21 @@ public class MainActivity extends ActionBarActivity
                 currentItem = 3;
                switchfragment(mycollection);
         }
-
+        onSectionAttached(position);
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
-            case 1:
+            case 0:
                 mTitle = getString(R.string.title_section1);
                 break;
-            case 2:
+            case 1:
                 mTitle = getString(R.string.title_section2);
                 break;
-            case 3:
+            case 2:
                 mTitle = getString(R.string.title_section3);
                 break;
-            case 4:
+            case 3:
                 mTitle = getString(R.string.title_section4);
                 break;
 
@@ -201,7 +199,10 @@ public class MainActivity extends ActionBarActivity
                     startActivityForResult(intent_ask, 1);
                     return true;
                 case 2:
-                    break;
+
+                    Intent intent_lendinfo = new Intent(this,lendInfo.class);
+                    startActivityForResult(intent_lendinfo, 1);
+                    return true;
                 case 3:
                     break;
             }

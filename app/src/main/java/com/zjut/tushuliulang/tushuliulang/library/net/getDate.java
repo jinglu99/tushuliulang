@@ -1,8 +1,7 @@
-package com.zjut.tushuliulang.tushuliulang.net.bookshare;
+package com.zjut.tushuliulang.tushuliulang.library.net;
 
 import android.util.Log;
 
-import com.zjut.tushuliulang.tushuliulang.net.COMMENT;
 import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
 
 import org.apache.http.HttpEntity;
@@ -23,36 +22,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Ben on 2015/9/21.
+ * Created by Ben on 2015/10/8.
  */
-public class  upload_book_share_comment {
-    private String url ;
-    private boolean result = false;
-    private String shareid="";
-    private String stuid = "";
-    private String comment = "";
-
+public class getDate
+{
     private String tmp = "";
     private InputStream is;
+    private boolean result = false;
+    private String d1 = "";
+    private String d2 = "";
+    private String url = TSLLURL.getdate;
 
+    private String code = "";
+    private String codeincode = "";
 
-    public upload_book_share_comment(COMMENT comment,int k)
+    public getDate(String code, String codeincode)
     {
-        this.shareid = comment.shareid;
-        this.stuid = comment.stuid;
-        this.comment = comment.comment;
-
-        switch (k)
-        {
-            case 0:
-                url = TSLLURL.booksharecomment_book;
-                break;
-            case 1:
-                url = TSLLURL.booksharecomment_ppt;
-                break;
-
-        }
+        this.code = code;
+        this.codeincode = codeincode;
     }
+
     public boolean fetch()
     {
         connect();
@@ -61,42 +50,24 @@ public class  upload_book_share_comment {
         return result;
     }
 
-    private void regexp() {
-
-        Pattern pattern = Pattern.compile("<result>true</result>");
-        Matcher matcher = pattern.matcher(tmp);
-        if (matcher.find())
-        {
-            result = true;
-        }
-        else
-        {
-            result = false;
-        }
-    }
-
     private void connect() {
         List<BasicNameValuePair> gets = new LinkedList<>();
-
-        gets.add(new BasicNameValuePair("shareid",shareid));
-        gets.add(new BasicNameValuePair("stuid",stuid));
-        gets.add(new BasicNameValuePair("comment",comment));
-
-
+        gets.add(new BasicNameValuePair("code", code));
+        gets.add(new BasicNameValuePair("codeincode", codeincode));
 
         String get = URLEncodedUtils.format(gets, "UTF-8");
-//        HttpGet getmethod = new HttpGet(TSLLURL.search + '?' + get);
+//        HttpGet getmethod = new HttpGet(url + '?' + get);
 
+        InputStream is = null;
 
         try {
             //得到HttpClient对象
             HttpClient getClient = new DefaultHttpClient();
+
+
             //得到HttpGet对象
-            HttpGet request;
-
-                request = new HttpGet(url + "?" +
-                        get);
-
+            HttpGet request = new HttpGet(url + "?" +
+                    get);
             //客户端使用GET方式执行请教，获得服务器端的回应response
             HttpResponse response = getClient.execute(request);
             //判断请求是否成功
@@ -114,7 +85,6 @@ public class  upload_book_share_comment {
         } catch (Exception e) {
             // TODO Auto-generated catch block
             Log.e("wonrg", "wrong");
-
             e.printStackTrace();
         }
         try {
@@ -124,10 +94,42 @@ public class  upload_book_share_comment {
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
-            is.close();
+
+
+
 
             tmp = sb.toString();
+
+
+            is.close();
         } catch (Exception e) {
+//                    return "Fail to convert net stream!";
         }
     }
+
+    private void regexp() {
+        Pattern p = Pattern.compile("<result>true</result>");
+        Matcher m = p.matcher(tmp);
+        if(m.find())
+        {
+
+            Pattern pattern ;
+            Matcher matcher;
+
+            pattern = Pattern.compile("<d1>(.*)</d1>");
+            matcher = pattern.matcher(tmp);
+            if(matcher.find())
+                d1 = matcher.group(1);
+
+            pattern = Pattern.compile("<d2>(.*)</d2>");
+            matcher = pattern.matcher(tmp);
+            if(matcher.find())
+                d2 = matcher.group(1);
+            result = true;
+
+        }
+    }
+
+    public String getd1(){return d1;}
+    public String getd2(){return d2;}
 }

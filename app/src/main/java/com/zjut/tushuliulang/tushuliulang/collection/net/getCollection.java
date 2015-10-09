@@ -1,6 +1,9 @@
-package com.zjut.tushuliulang.tushuliulang.net;
+package com.zjut.tushuliulang.tushuliulang.collection.net;
 
 import android.util.Log;
+
+import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
+import com.zjut.tushuliulang.tushuliulang.bookshare.*;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,30 +23,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Ben on 2015/9/28.
+ * Created by Ben on 2015/10/5.
  */
-public class borrowBook
+public class getCollection
 {
-    private String tmp="";
+    private String tmp = "";
     private InputStream is;
-    private boolean result = false;
-    private String error="";
+    private boolean result;
+    private String url = TSLLURL.getCollection;
 
-    private String stuid;
-    private String code;
-    private String codeincode;
-    private String shareid;
-    private String date;
+    private String stuid = "";
+    private COLLECTION_INFO[] collectionInfos;
 
-    public borrowBook(String stuid,String code,String codeincode,String shareid,String date)
+    public getCollection(String stuid)
     {
         this.stuid = stuid;
-        this.code = code;
-        this.codeincode = codeincode;
-        this.shareid = shareid;
-        this.date = date;
     }
-
     public boolean fetch()
     {
         connect();
@@ -52,15 +47,9 @@ public class borrowBook
         return result;
     }
 
-    private void connect()
-    {
+    private void connect() {
         List<BasicNameValuePair> gets = new LinkedList<>();
         gets.add(new BasicNameValuePair("stuid", stuid));
-        gets.add(new BasicNameValuePair("code",code));
-        gets.add(new BasicNameValuePair("codeincode",codeincode));
-        gets.add(new BasicNameValuePair("shareid",shareid));
-        gets.add(new BasicNameValuePair("date",date));
-
 
         String get = URLEncodedUtils.format(gets, "UTF-8");
 //        HttpGet getmethod = new HttpGet(url + '?' + get);
@@ -73,7 +62,7 @@ public class borrowBook
 
 
             //得到HttpGet对象
-            HttpGet request = new HttpGet(TSLLURL.search + "?" +
+            HttpGet request = new HttpGet(url + "?" +
                     get);
             //客户端使用GET方式执行请教，获得服务器端的回应response
             HttpResponse response = getClient.execute(request);
@@ -112,42 +101,61 @@ public class borrowBook
         } catch (Exception e) {
 //                    return "Fail to convert net stream!";
         }
-
-
     }
 
-    private void regexp()
-    {
-        Pattern pattern_result = Pattern.compile("<result>(.*)</result>");
-        Matcher matcher_result = pattern_result.matcher(tmp);
-        if (matcher_result.find())
-        {
-            String r = matcher_result.group(1);
-            if (r.equals("true"))
-            {
-                result = true;
-            }
-            else
-            {
-                result = false;
-            }
+    private void regexp() {
 
-            Pattern pattern_error = Pattern.compile("<error>(.*)</error>");
-            Matcher matcher_error =  pattern_error.matcher(tmp);
-            if (matcher_error.find())
-            {
-                error = matcher_error.group(1);
-            }
-        }
-        else
+        Pattern pattern_total = Pattern.compile("<found>([\\s\\S]*)</found>");
+        Matcher matcher_total = pattern_total.matcher(tmp);
+        if (matcher_total.find())
         {
+            int n = Integer.parseInt(matcher_total.group(1));
+           collectionInfos = new COLLECTION_INFO[n];
+            n=0;
             result = false;
-            error = "no_network_connection";
+
+            Pattern pattern_bookshare = Pattern.compile("<collection>([\\s\\S]*?)</collection>");
+            Matcher matcher_bookshare = pattern_bookshare.matcher(tmp);
+            while(matcher_bookshare.find())
+            {
+                collectionInfos[n] = new COLLECTION_INFO();
+
+                String str = matcher_bookshare.group(1);
+
+                Pattern pattern_k = Pattern.compile("<kind>(.*)</kind>");
+                Matcher matcher_k = pattern_k.matcher(str);
+                matcher_k.find();
+                collectionInfos[n].k = matcher_k.group(1);
+
+                Pattern pattern_code = Pattern.compile("<code>(.*)</code>");
+                Matcher matcher_code = pattern_code.matcher(str);
+                matcher_code.find();
+                collectionInfos[n].code = matcher_code.group(1);
+
+
+                Pattern pattern_time= Pattern.compile("<time>(.*)</time>");
+                Matcher matcher_time = pattern_time.matcher(str);
+                matcher_time.find();
+                collectionInfos[n].time = matcher_time.group(1);
+
+                switch (collectionInfos[n].k)
+                {
+                    case "1":
+                        getBookShareInfo bookShareInfo = new getBookShareInfo(collectionInfos[n].code);
+                        bookShareInfo.fetch();
+                        collectionInfos[n].name = bookShareInfo.getShareinfo().book_name;
+
+                }
+
+
+                result = true;
+                n++;
+            }
+
         }
     }
-
-    public String getError()
+    public COLLECTION_INFO[] getCollections()
     {
-        return error;
+        return collectionInfos;
     }
 }

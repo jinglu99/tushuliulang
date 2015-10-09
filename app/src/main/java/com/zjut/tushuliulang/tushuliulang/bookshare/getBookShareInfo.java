@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang.net.bookshare;
+package com.zjut.tushuliulang.tushuliulang.bookshare;
 
 import android.util.Log;
 
@@ -32,6 +32,8 @@ public class getBookShareInfo
     private String order;
     private String result = "";
     private BOOK_SHARE share;
+
+
 
     public getBookShareInfo(String order)
     {
@@ -133,7 +135,7 @@ public class getBookShareInfo
                 Pattern pattern_codeincode = Pattern.compile("<codeincode>(.*)</codeincode>");
                 Matcher matcher_codeincode = pattern_codeincode.matcher(tmp);
                 matcher_codeincode.find();
-                share.code = matcher_codeincode.group(1);
+                share.codeincode = matcher_codeincode.group(1);
 
                 Pattern pattern_available = Pattern.compile("<available>(.*)</available>");
                 Matcher matcher_available = pattern_available.matcher(tmp);

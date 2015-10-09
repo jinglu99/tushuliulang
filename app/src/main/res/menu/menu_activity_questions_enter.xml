@@ -4,7 +4,7 @@
 
     <item
         android:title="return to answer"
-        android:id="@+id/editinfo"
+        android:id="@+id/answer"
         app:showAsAction="withText|ifRoom"
         android:icon="@drawable/add"
         ></item>

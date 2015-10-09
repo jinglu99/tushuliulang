@@ -1,4 +1,4 @@
-package com.zjut.tushuliulang.tushuliulang.net.bookshare;
+package com.zjut.tushuliulang.tushuliulang.bookshare;
 
 import android.util.Log;
 

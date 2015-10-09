@@ -1,5 +1,6 @@
 package com.zjut.tushuliulang.tushuliulang.question.ask;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,13 +9,15 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,6 +27,7 @@ import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
+import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -39,7 +43,7 @@ import java.util.Date;
 /**
  * Created by Administrator on 2015/8/30 0030.
  */
-public class AskAcitivity extends FragmentActivity implements View.OnClickListener{
+public class AskAcitivity extends ActionBarActivity implements View.OnClickListener{
 
     private TextView tv_table_question, tv__table_describe;
     private ArrayList<Fragment> listFragment;
@@ -81,20 +85,26 @@ public class AskAcitivity extends FragmentActivity implements View.OnClickListen
         init();
     }
 
-    /**
-     *发表按钮监听
-     */
-    public void Upload(View v){
-        //弹框询问
-        Upload_Pop_Up();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_ask, menu);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        return true;
     }
 
-    /**
-     *取消按钮监听
-     */
-    public void Back(View v){
-        //返回界面
-        finish();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.Upload){
+            //弹框询问
+            Upload_Pop_Up();
+            return true;
+        }else if (id == android.R.id.home){
+          finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -102,7 +112,7 @@ public class AskAcitivity extends FragmentActivity implements View.OnClickListen
      */
     public void Null_Pop_Up(){
         new AlertDialog.Builder(this).setTitle("空内容提示")
-                .setMessage("请确定在问题栏以及学号处输入内容")
+                .setMessage("请确定已在问题栏输入内容")
                 .setPositiveButton("确定", null)
                 .show();
     }
@@ -239,7 +249,7 @@ public class AskAcitivity extends FragmentActivity implements View.OnClickListen
                     Thread t = new Thread(){
                         @Override
                         public void run() {
-                            String path = "http://120.24.242.211/tushu/questions.php"+
+                            String path = TSLLURL.questions+
                                     "?question=" + URLEncoder.encode(question)+"&describe="+
                                     URLEncoder.encode(describe)+ "&studentID="+
                                     URLEncoder.encode(studentID);

@@ -51,7 +51,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="啊加速度克劳馥就立刻杀掉离开房间昆仑山"
                     android:id="@+id/book_share_info_bookname"
                     android:layout_weight="0.30"
                     android:layout_gravity="center"
@@ -127,13 +126,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="收藏"
-            android:id="@+id/button" />
+            android:id="@+id/book_share_collect" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="借阅"
-            android:id="@+id/button2" />
+            android:id="@+id/book_share_borrow" />
     </LinearLayout>
 
     <LinearLayout

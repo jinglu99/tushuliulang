@@ -1,9 +1,8 @@
-package com.zjut.tushuliulang.tushuliulang.net.bookshare;
+package com.zjut.tushuliulang.tushuliulang.bookshare;
 
 import android.util.Log;
 
 import com.zjut.tushuliulang.tushuliulang.net.TSLLURL;
-import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -35,6 +34,7 @@ public class getbookshares
     private boolean parameter = false;
     private String input;
     private String next="";
+    private int total;
 
     public getbookshares()
     {
@@ -123,6 +123,7 @@ public class getbookshares
         {
             int n = Integer.parseInt(matcher_total.group(1));
             shares = new BOOK_SHARE[n];
+            total = n;
             n=0;
 
             Pattern pattern_bookshare = Pattern.compile("<bookshare>([\\s\\S]*?)</bookshare>");
@@ -182,4 +183,5 @@ public class getbookshares
     {
         return next;
     }
+    public int gettotal(){return total;};
 }

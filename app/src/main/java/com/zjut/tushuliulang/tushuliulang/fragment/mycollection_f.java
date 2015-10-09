@@ -4,16 +4,22 @@ package com.zjut.tushuliulang.tushuliulang.fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjut.tushuliulang.tushuliulang.R;
+import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
 import com.zjut.tushuliulang.tushuliulang.net.Change_Info;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
 import com.zjut.tushuliulang.tushuliulang.net.Search;
 import com.zjut.tushuliulang.tushuliulang.net.login;
+import com.zjut.tushuliulang.tushuliulang.collection.net.*;
+import com.zjut.tushuliulang.tushuliulang.widget.*;
 
 
 /**
@@ -21,30 +27,11 @@ import com.zjut.tushuliulang.tushuliulang.net.login;
  */
 public class mycollection_f extends Fragment {
 
-        String s="no";
-        private TextView textView;
-    //侧滑栏
-    private static final String ARG_SECTION_NUMBER = "section_number";
+    String s="no";
+    private TextView textView;
+    private LinearLayout layout;
+    private SwipeRefreshLayout refreshLayout;
 
-//    //侧滑栏
-//    public static Fragment newInstance(int sectionNumber) {
-//        share_f fragment = new share_f();
-//        Bundle args = new Bundle();
-//        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//        fragment.setArguments(args);
-//
-//        return fragment;
-//    }
-//
-//    //侧滑栏
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        ((MainActivity) activity).onSectionAttached(
-//                getArguments().getInt(ARG_SECTION_NUMBER));
-//    }
-
-    //侧滑栏
     public mycollection_f() {
         int a;
         // Required empty public constructor
@@ -56,32 +43,63 @@ public class mycollection_f extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_mycollection_f, container, false);
-        textView = (TextView) v.findViewById(R.id.testttt);
+        layout = (LinearLayout) v.findViewById(R.id.collection_layout);
+        refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.refresh_collection_f);
 
-//        textView.setText(s);
-         new threadnet().execute();
-        // Inflate the layout for this fragment
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                layout.removeAllViews();
+                new getcollections().execute();
+            }
+        });
+
+        new getcollections().execute();
         return v;
     }
-    class threadnet extends AsyncTask<String,String,String>
+    class getcollections extends AsyncTask<String,String,String>
     {
-//        TextView textView1;
-        login l;
-        Change_Info c;
-        String st="";
-        STU_INFO stu_info;
+        private getCollection getcollection;
+        private COLLECTION_INFO[] collectionInfo;
         @Override
         protected String doInBackground(String... params) {
 
-            Search s = new Search("数据");
-            s.fetch();
-
+            getcollection = new getCollection(GetInfoFromFile.getinfo().Id);
+            if (getcollection.fetch())
+            {
+                collectionInfo = getcollection.getCollections();
+            }
              return "";
         }
 
         @Override
         protected void onPostExecute(String s) {
+            boolean f = false;
+            if (collectionInfo!=null) {
+                f = collectionInfo.length % 2 != 0;
 
+
+            for(int n = 0 ; n < collectionInfo.length/2;n++)
+            {
+
+                    collection_widget view = new collection_widget(getActivity());
+                    view.setcontent(Integer.parseInt(collectionInfo[n*2].k),collectionInfo[n*2].code,collectionInfo[n*2].name,
+                            Integer.parseInt(collectionInfo[n*2+1].k),collectionInfo[n*2+1].code,collectionInfo[n*2+1].name );
+                layout.setGravity(Gravity.NO_GRAVITY);
+                layout.addView(view);
+
+            }
+
+            if (f)
+            {
+                collection_widget view = new collection_widget(getActivity());
+                view.setcontent(Integer.parseInt(collectionInfo[collectionInfo.length-1].k),collectionInfo[collectionInfo.length-1].code,collectionInfo[collectionInfo.length-1].name,
+                      3,"",null );
+                layout.setGravity(Gravity.NO_GRAVITY);
+                layout.addView(view);
+            }
+            }
+            refreshLayout.setRefreshing(false);
             super.onPostExecute(s);
 
         }

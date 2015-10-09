@@ -40,7 +40,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="我发布的" />
+                android:text="我借出的书" />
             <!-- tab3 -->
         </LinearLayout>
     </com.andexert.library.RippleView>

@@ -1,8 +1,6 @@
-package com.zjut.tushuliulang.tushuliulang.net.bookshare;
+package com.zjut.tushuliulang.tushuliulang.bookshare;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.text.Editable;
 
 /**
  * Created by Ben on 2015/9/2.

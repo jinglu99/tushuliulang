@@ -13,12 +13,13 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.activities.Book_share_info;
 import com.zjut.tushuliulang.tushuliulang.listadapter_share;
-import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
-import com.zjut.tushuliulang.tushuliulang.net.bookshare.getbookshares;
+import com.zjut.tushuliulang.tushuliulang.bookshare.BOOK_SHARE;
+import com.zjut.tushuliulang.tushuliulang.bookshare.getbookshares;
 import com.zjut.tushuliulang.tushuliulang.question.question.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class share_book extends Fragment implements ListView.OnItemClickListener
 
     private FloatingActionButton add_more;
 
-
+    List<Map<String, Object>> l = new ArrayList<Map<String, Object>>();
 
     public share_book() {
         // Required empty public constructor
@@ -63,9 +64,10 @@ public class share_book extends Fragment implements ListView.OnItemClickListener
         listView = (ListView) view.findViewById(R.id.share_book_listview);
         listView .setOnItemClickListener(this);
 
+
         istopped();
 
-        new getshare().execute();
+        new getshare().execute("");
 
 
         add_more = (FloatingActionButton) view.findViewById(R.id.fabbutton_book_share);
@@ -73,7 +75,17 @@ public class share_book extends Fragment implements ListView.OnItemClickListener
         add_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String next = getshares.getnext();
 
+                if (next.equals("0"))
+                {
+                    Toast.makeText(getActivity(),"没有啦！",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    new getshare().execute(next);
+
+                }
             }
         });
         return view;
@@ -129,21 +141,46 @@ public class share_book extends Fragment implements ListView.OnItemClickListener
 
     @Override
     public void onRefresh() {
-        new getshare().execute();
+        l = new ArrayList<Map<String, Object>>();
+        new getshare().execute("");
     }
 
 
     class getshare extends AsyncTask<String,String,String>
     {
-        List<Map<String, Object>> l = new ArrayList<Map<String, Object>>();
+
         @Override
         protected String doInBackground(String... params) {
 
-            getshares = new getbookshares();
 
+            if (params[0].equals("")) {
+                getshares = new getbookshares();
+            }
+            else
+            {
+                getshares = new getbookshares(params[0]);
+            }
 
             if(getshares.fetch()) {
-                shares = getshares.getShares();
+                if (params[0].equals("")) {
+                    shares = getshares.getShares();
+                }
+                else
+                {
+                   int total = shares.length + getshares.gettotal();
+                    BOOK_SHARE[] newshare = getshares.getShares();
+                    BOOK_SHARE[] oldshare = shares;
+                    shares = new BOOK_SHARE[total];
+                    for(int n=0;n<oldshare.length;n++)
+                    {
+                        shares[n] = oldshare[n];
+                    }
+                    for (int n = oldshare.length, ns=0;n<total;n++,ns++)
+                    {
+                        shares[n] = newshare[ns];
+                    }
+                }
+
 
                 for (int n = 0; n < shares.length; n++) {
                     Map<String, Object> map = new HashMap<String, Object>();
@@ -160,8 +197,10 @@ public class share_book extends Fragment implements ListView.OnItemClickListener
 
         @Override
         protected void onPostExecute(String s) {
-            listView.setAdapter(new listadapter_share(getActivity(),l));
+            int position = listView.getFirstVisiblePosition();
+            listView.setAdapter(new listadapter_share(getActivity(), l));
 
+            listView.setSelection(position);
             swipeRefreshLayout.setRefreshing(false);
 
 

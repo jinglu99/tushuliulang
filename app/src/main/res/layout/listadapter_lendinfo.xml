@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.02"
+        android:background="#b9ffe2">
+
+        <com.zjut.tushuliulang.tushuliulang.widget.CircleImageView
+            android:layout_width="112dp"
+            android:layout_height="96dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/listadapter_lendinfo_image"
+            app:border_width="2dp"
+            app:border_color="@color/dim_foreground_disabled_material_dark"
+            android:src="@drawable/lzy"
+            />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="37dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/listadapter_lendinfo_name"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/listadapter_lendinfo_date"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/listadapter_lendinfo"
+                android:text="向你发送借书请求"
+                android:gravity="center" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -26,8 +26,8 @@ import android.widget.Toast;
 
 import com.zjut.tushuliulang.tushuliulang.R;
 import com.zjut.tushuliulang.tushuliulang.backoperate.GetInfoFromFile;
-import com.zjut.tushuliulang.tushuliulang.net.bookshare.BOOK_SHARE;
-import com.zjut.tushuliulang.tushuliulang.net.bookshare.PublishBookShare;
+import com.zjut.tushuliulang.tushuliulang.bookshare.BOOK_SHARE;
+import com.zjut.tushuliulang.tushuliulang.bookshare.PublishBookShare;
 import com.zjut.tushuliulang.tushuliulang.net.STU_INFO;
 import com.zjut.tushuliulang.tushuliulang.net.UploadFile;
 
@@ -258,6 +258,12 @@ public class add_book_share extends ActionBarActivity  {
             if(added = publishBookShare.add())
             {
                 uploadFile = new UploadFile(params[0].imagedir,publishBookShare.getShare().number_order+".jpg",2);
+                uploadFile.uploadFile();
+                if(uploadFile.getResult().equals(""))
+                {
+                    added = false;
+                }
+                uploadFile = new UploadFile(params[0].imagedir,publishBookShare.getShare().code+".jpg",3);
                 uploadFile.uploadFile();
                 if(uploadFile.getResult().equals(""))
                 {

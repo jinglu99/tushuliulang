@@ -66,6 +66,7 @@ public class login_activity extends ActionBarActivity implements View.OnClickLis
         tv_explaination = (TextView) findViewById(R.id.tv_explaination);
 
         bt_login.setOnClickListener(this);
+        checkBox.setChecked(true);
 
 
         getremember();
