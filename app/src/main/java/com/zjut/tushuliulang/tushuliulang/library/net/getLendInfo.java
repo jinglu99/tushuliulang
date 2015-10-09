@@ -127,7 +127,7 @@ public class getLendInfo
                 Pattern pattern_shareid = Pattern.compile("<shareid>(.*)</shareid>");
                 Matcher matcher_shareid = pattern_shareid.matcher(str);
                 matcher_shareid.find();
-                lendinfos[n].lender = matcher_shareid.group(1);
+                lendinfos[n].shareid = matcher_shareid.group(1);
 
                 Pattern pattern_lender = Pattern.compile("<lender>(.*)</lender>");
                 Matcher matcher_lender = pattern_lender.matcher(str);

@@ -80,7 +80,7 @@ public class getLends
                 if(getshareid.fetch())
                 {
 
-                    lendinfos[n].lender = getshareid.getbookshareid();
+                    lendinfos[n].shareid = getshareid.getbookshareid();
                 }
 
                 result = true;

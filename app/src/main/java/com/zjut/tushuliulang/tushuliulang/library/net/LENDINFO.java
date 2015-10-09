@@ -12,4 +12,5 @@ public class LENDINFO
     public String name = "";
     public String intro = "";
     public String time = "";
+    public String shareid="";
 }

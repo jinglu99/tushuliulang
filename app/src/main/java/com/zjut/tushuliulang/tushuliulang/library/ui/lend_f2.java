@@ -63,7 +63,7 @@ public class lend_f2 extends Fragment {
 
                     Intent intent = new Intent(getActivity(),book_info_library.class);
                     intent.putExtra("type","share");
-                    intent.putExtra("code",lendinfos[position].lender);
+                    intent.putExtra("code",lendinfos[position].shareid);
 
                     startActivity(intent);
 
@@ -97,7 +97,7 @@ public class lend_f2 extends Fragment {
                     for(int n =0 ;n<lendinfos.length;n++)
                     {
 
-                            getBookShareInfo bookShareInfo = new getBookShareInfo(lendinfos[n].lender);
+                            getBookShareInfo bookShareInfo = new getBookShareInfo(lendinfos[n].shareid);
                             if (bookShareInfo.fetch().equals("true"))
                             {
                                 lendinfos[n].name = bookShareInfo.getShareinfo().book_name;
@@ -106,7 +106,7 @@ public class lend_f2 extends Fragment {
                                 Map<String, Object> map = new HashMap<String, Object>();
                                 map.put("a", lendinfos[n].name);
                                 map.put("b", lendinfos[n].intro);
-                                map.put("i", lendinfos[n].lender);
+                                map.put("i", lendinfos[n].shareid);
                                 map.put("type","share");
                                 l.add(map);
                             }

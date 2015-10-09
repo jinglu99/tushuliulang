@@ -208,18 +208,18 @@ public class lendInfo extends ActionBarActivity {
         protected String doInBackground(String... params) {
 
             int n = Integer.parseInt(params[0]);
-            bookShareInfo = new getBookShareInfo(lendinfos[n].lender);
+            bookShareInfo = new getBookShareInfo(lendinfos[n].shareid);
             if (bookShareInfo.fetch().equals("true"))
             {
                 code = bookShareInfo.getShareinfo().code;
                 codeincode = bookShareInfo.getShareinfo().codeincode;
             }
 
-            borrow = new borrowBook(lendinfos[n].lender,code,codeincode,lendinfos[n].lender,"2");
+            borrow = new borrowBook(lendinfos[n].lender,code,codeincode,lendinfos[n].shareid,"2");
             if (borrow.fetch())
             {
                 result = true;
-                delete = new deleteLendInfo(lendinfos[n].lender,lendinfos[n].lender);
+                delete = new deleteLendInfo(lendinfos[n].shareid,lendinfos[n].lender);
               delete.deleteinfo();
             }
             return null;
@@ -253,7 +253,7 @@ public class lendInfo extends ActionBarActivity {
         @Override
         protected String doInBackground(String... params) {
             int n = Integer.parseInt(params[0]);
-            delete = new deleteLendInfo(lendinfos[n].lender,lendinfos[n].lender);
+            delete = new deleteLendInfo(lendinfos[n].shareid,lendinfos[n].lender);
             if(delete.deleteinfo())
             {
                 result = true;
